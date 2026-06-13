@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 Khái niệm Nền tảng của Tâm lý học</title>
+<style>
+  :root{
+    --paper:#FBF7EF;
+    --paper-2:#F3ECE0;
+    --ink:#2C2A28;
+    --ink-soft:#6B645C;
+    --line:#E4DCCC;
+    --card:#FFFFFF;
+    --accent:#C1573B;
+    --ring: rgba(193,87,59,.35);
+
+    --c1:#3F6FA8; /* Nhận thức */
+    --c2:#8A6BB0; /* Trí nhớ */
+    --c3:#4F9B6E; /* Học tập */
+    --c4:#D08A3E; /* Phát triển */
+    --c5:#C25E7C; /* Nhân cách */
+    --c6:#3F9C95; /* Xã hội */
+    --c7:#DD7A52; /* Cảm xúc & Động lực */
+    --c8:#B0524A; /* Lâm sàng */
+    --c9:#5B6BB8; /* Sinh lý & Thần kinh */
+    --c10:#C49A2E; /* Thiên kiến */
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--paper); color:var(--ink); font-family:Georgia, "Times New Roman", serif;}
+  body{
+    font-family: "Iowan Old Style","Palatino Linotype", Georgia, serif;
+    line-height:1.5;
+    padding-bottom:60px;
+  }
+  .sans{font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;}
+
+  /* ===== Header ===== */
+  header{
+    padding:48px 24px 28px;
+    max-width:1080px;
+    margin:0 auto;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-size:11px;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  h1{
+    font-size:clamp(34px, 6vw, 58px);
+    font-weight:700;
+    letter-spacing:-0.01em;
+    line-height:1.08;
+  }
+  h1 em{ color:var(--accent); font-style:italic; }
+  .subtitle{
+    margin-top:14px;
+    max-width:640px;
+    color:var(--ink-soft);
+    font-size:16px;
+  }
+
+  /* ===== Controls ===== */
+  .controls{
+    max-width:1080px;
+    margin:28px auto 0;
+    padding:0 24px;
+  }
+  .search-wrap{
+    position:relative;
+    margin-bottom:18px;
+  }
+  #search{
+    width:100%;
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    font-size:16px;
+    padding:14px 18px 14px 44px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--card);
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  #search:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 4px var(--ring);
+  }
+  .search-icon{
+    position:absolute; left:16px; top:50%; transform:translateY(-50%);
+    width:16px; height:16px; color:var(--ink-soft);
+  }
+  .chips{
+    display:flex; flex-wrap:wrap; gap:8px;
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+  .chip{
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--ink-soft);
+    font-size:13px;
+    font-weight:600;
+    padding:7px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    transition: all .15s;
+    display:flex; align-items:center; gap:6px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .chip .dot{ width:8px; height:8px; border-radius:50%; background:var(--dotcolor, var(--ink-soft)); }
+  .chip:hover{ border-color:var(--ink-soft); color:var(--ink); }
+  .chip.active{
+    background:var(--ink);
+    color:var(--paper);
+    border-color:var(--ink);
+  }
+  .chip.active .dot{ background: var(--paper); }
+
+  .count-row{
+    max-width:1080px; margin:18px auto 0; padding:0 24px;
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    font-size:13px; color:var(--ink-soft);
+  }
+
+  /* ===== Grid ===== */
+  .grid{
+    max-width:1080px;
+    margin:18px auto 0;
+    padding:0 24px;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap:14px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px;
+    cursor:pointer;
+    text-align:left;
+    font-family: inherit;
+    color:inherit;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    display:flex; flex-direction:column; gap:10px;
+    min-height:140px;
+  }
+  .card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -16px rgba(0,0,0,.35);
+    border-color: var(--cardcolor);
+  }
+  .card:focus-visible{
+    outline:none;
+    box-shadow: 0 0 0 3px var(--ring);
+    border-color: var(--accent);
+  }
+  .card-top{
+    display:flex; align-items:center; justify-content:space-between;
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+  .num{
+    font-size:11px; font-weight:700; letter-spacing:.1em;
+    color: var(--cardcolor);
+  }
+  .cat-tag{
+    font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color: var(--cardcolor);
+    background: color-mix(in srgb, var(--cardcolor) 14%, white);
+    padding:3px 8px; border-radius:6px;
+  }
+  .card h3{
+    font-size:18px; font-weight:700; line-height:1.3;
+  }
+  .card h3 .en{
+    display:block; font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    font-size:12px; font-weight:600; color:var(--ink-soft); margin-top:3px; letter-spacing:.02em;
+  }
+  .card p{
+    font-size:13.5px; color:var(--ink-soft);
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    flex-grow:1;
+  }
+  .card .read{
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    font-size:12px; font-weight:700; color:var(--cardcolor);
+    display:flex; align-items:center; gap:5px;
+  }
+  .card .read svg{ width:12px; height:12px; transition: transform .15s; }
+  .card:hover .read svg{ transform: translateX(3px); }
+
+  .no-results{
+    max-width:1080px; margin:40px auto; padding:0 24px;
+    text-align:center; color:var(--ink-soft);
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    display:none;
+  }
+
+  /* ===== Modal ===== */
+  .overlay{
+    position:fixed; inset:0; background:rgba(44,42,40,.45);
+    display:none; align-items:flex-start; justify-content:center;
+    padding:5vh 16px; z-index:100; overflow-y:auto;
+    backdrop-filter: blur(2px);
+  }
+  .overlay.open{ display:flex; }
+  .modal{
+    background:var(--paper);
+    border-radius:16px;
+    max-width:680px; width:100%;
+    margin-top:0;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,.4);
+    border:1px solid var(--line);
+    overflow:hidden;
+    animation: pop .18s ease;
+  }
+  @keyframes pop{ from{ opacity:0; transform: translateY(10px) scale(.98);} to{opacity:1; transform:none;} }
+
+  .modal-head{
+    padding:28px 28px 20px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--modalcolor) 10%, var(--paper)), var(--paper));
+  }
+  .modal-eyebrow{
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--modalcolor);
+    margin-bottom:10px;
+  }
+  .modal-head h2{
+    font-size: clamp(24px,4vw,32px);
+    line-height:1.2;
+  }
+  .modal-head .en{
+    display:block; margin-top:6px;
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    font-size:14px; font-weight:600; color:var(--ink-soft);
+  }
+  .modal-close{
+    position:absolute; top:20px; right:20px;
+    width:34px; height:34px; border-radius:50%;
+    border:1px solid var(--line); background:var(--card);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; color:var(--ink-soft);
+    transition: all .15s;
+  }
+  .modal-close:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+  .modal-body{ padding:24px 28px 30px; }
+  .modal-section{ margin-bottom:22px; }
+  .modal-section:last-child{ margin-bottom:0; }
+  .modal-label{
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--modalcolor);
+    margin-bottom:8px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .modal-label::after{
+    content:""; flex:1; height:1px; background:var(--line);
+  }
+  .modal-section p{
+    font-size:16.5px; color:var(--ink); line-height:1.65;
+  }
+  .example-box{
+    background: color-mix(in srgb, var(--modalcolor) 8%, var(--paper));
+    border-left:3px solid var(--modalcolor);
+    border-radius:8px;
+    padding:14px 16px;
+    font-size:15.5px;
+    line-height:1.6;
+  }
+  .modal-foot{
+    padding:14px 28px 22px;
+    display:flex; gap:8px;
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+  .nav-btn{
+    flex:1;
+    border:1px solid var(--line);
+    background:var(--card);
+    border-radius:10px;
+    padding:11px;
+    font-size:13px; font-weight:700;
+    color:var(--ink);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    transition: all .15s;
+  }
+  .nav-btn:hover{ border-color:var(--ink); }
+  .nav-btn svg{ width:14px; height:14px; }
+
+  /* footer */
+  footer{
+    max-width:1080px; margin:50px auto 0; padding:24px 24px 0;
+    border-top:1px solid var(--line);
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    font-size:12.5px; color:var(--ink-soft); text-align:center;
+  }
+
+  @media (max-width:560px){
+    header{padding:36px 18px 22px;}
+    .controls, .grid, .count-row, footer{padding-left:18px; padding-right:18px;}
+    .grid{grid-template-columns: 1fr;}
+    .modal-head{padding:22px 20px 16px;}
+    .modal-body{padding:20px 20px 24px;}
+    .modal-foot{padding:10px 20px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow sans">Bản đồ tâm lý học · 100 khái niệm cốt lõi</div>
+  <h1>Tinh tuý <em>Tâm lý học</em></h1>
+  <p class="subtitle">Một bộ sưu tập 100 khái niệm nền tảng — từ nhận thức, trí nhớ, học tập đến nhân cách, xã hội và lâm sàng — mỗi khái niệm kèm diễn giải dễ hiểu và ví dụ thực tế. Gõ để tìm, hoặc lọc theo nhóm.</p>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search" placeholder="Tìm khái niệm... (ví dụ: trí nhớ, thiên kiến, gắn bó)" autocomplete="off">
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="count-row" id="countRow"></div>
+
+<div class="grid" id="grid"></div>
+<div class="no-results" id="noResults">Không tìm thấy khái niệm phù hợp. Hãy thử một từ khoá khác.</div>
+
+<footer>100 khái niệm nền tảng của tâm lý học · Dùng phím ←/→ hoặc Esc khi xem chi tiết · Lưu trang này để dùng offline</footer>
+
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <div class="modal-eyebrow sans" id="mCat"></div>
+      <h2 id="mName"></h2>
+      <span class="en" id="mEn"></span>
+      <div class="modal-close" id="mClose" tabindex="0" aria-label="Đóng">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-label">Diễn giải</div>
+        <p id="mDetail"></p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-label">Ví dụ thực tế</div>
+        <div class="example-box" id="mExample"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <div class="nav-btn" id="mPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Trước</div>
+      <div class="nav-btn" id="mNext">Sau <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CATS = [
+  {key:"nhanthuc", label:"Nhận thức", color:"var(--c1)"},
+  {key:"trinho", label:"Trí nhớ", color:"var(--c2)"},
+  {key:"hoctap", label:"Học tập", color:"var(--c3)"},
+  {key:"phattrien", label:"Phát triển", color:"var(--c4)"},
+  {key:"nhancach", label:"Nhân cách", color:"var(--c5)"},
+  {key:"xahoi", label:"Tâm lý xã hội", color:"var(--c6)"},
+  {key:"camxuc", label:"Cảm xúc & Động lực", color:"var(--c7)"},
+  {key:"lamsang", label:"Lâm sàng", color:"var(--c8)"},
+  {key:"sinhly", label:"Sinh lý & Thần kinh", color:"var(--c9)"},
+  {key:"thienkien", label:"Thiên kiến", color:"var(--c10)"},
+];
+
+const DATA = [
+// ===== 1. NHẬN THỨC =====
+{cat:"nhanthuc", vi:"Nhận thức", en:"Cognition", short:"Toàn bộ quá trình tinh thần dùng để xử lý thông tin.",
+ detail:"Nhận thức là tên gọi chung cho mọi hoạt động \"xử lý thông tin\" của tâm trí: tiếp nhận, lưu giữ, biến đổi và sử dụng thông tin để hiểu thế giới và đưa ra hành động. Nó bao gồm tri giác, chú ý, trí nhớ, ngôn ngữ, tư duy và ra quyết định — gần như mọi thứ \"bên trong đầu\" trừ cảm xúc thuần túy.",
+ example:"Khi bạn lái xe và thấy đèn đỏ, bạn nhận ra màu sắc (tri giác), nhớ luật giao thông (trí nhớ), hiểu ý nghĩa của tín hiệu (ngôn ngữ/khái niệm) và quyết định đạp phanh (ra quyết định) — tất cả chỉ trong vài phần giây, đó là nhận thức đang vận hành."},
+
+{cat:"nhanthuc", vi:"Chú ý", en:"Attention", short:"Khả năng tập trung nguồn lực tinh thần vào một phần thông tin và bỏ qua phần còn lại.",
+ detail:"Bộ não nhận được lượng thông tin khổng lồ mỗi giây nhưng chỉ có thể xử lý sâu một phần nhỏ. Chú ý là \"bộ lọc\" giúp chọn ra thông tin quan trọng để xử lý kỹ, trong khi phần còn lại bị giảm cường độ hoặc bỏ qua. Chú ý có thể tập trung, chia sẻ (làm nhiều việc) hoặc bị thu hút một cách tự động bởi kích thích nổi bật.",
+ example:"Hiệu ứng \"cocktail party\": trong một buổi tiệc ồn ào, bạn vẫn có thể nghe rõ khi ai đó gọi tên mình ở phía bên kia phòng — não bạn liên tục \"quét\" nền nhưng chỉ thực sự đưa vào ý thức những gì liên quan đến bạn."},
+
+{cat:"nhanthuc", vi:"Tri giác", en:"Perception", short:"Quá trình não bộ tổ chức và diễn giải thông tin cảm giác thành trải nghiệm có ý nghĩa.",
+ detail:"Cảm giác (sensation) là dữ liệu thô từ các giác quan, còn tri giác là quá trình não \"đóng gói\" dữ liệu đó thành những vật thể, âm thanh, khuôn mặt có ý nghĩa, dựa trên kinh nghiệm và kỳ vọng đã có. Vì vậy hai người nhìn cùng một hình ảnh có thể \"thấy\" những điều khác nhau.",
+ example:"Ảo giác cái bình/khuôn mặt (vase-faces illusion): cùng một hình vẽ, có người thấy hai khuôn mặt nhìn nhau, có người thấy một chiếc bình — dữ liệu thị giác giống nhau nhưng tri giác (cách não diễn giải) khác nhau."},
+
+{cat:"nhanthuc", vi:"Lược đồ nhận thức (Schema)", en:"Schema", short:"Khung tư duy có sẵn giúp tổ chức thông tin và dự đoán những gì sẽ xảy ra.",
+ detail:"Schema là một \"khuôn mẫu\" tinh thần được xây dựng từ kinh nghiệm, cho phép chúng ta nhanh chóng phân loại, hiểu và dự đoán các tình huống mới mà không phải xử lý mọi chi tiết từ đầu. Schema giúp tiết kiệm năng lượng nhận thức nhưng cũng có thể khiến ta bỏ lỡ thông tin không khớp với khuôn mẫu cũ.",
+ example:"Khi bước vào một nhà hàng lần đầu, bạn vẫn biết phải chờ được dẫn vào bàn, xem menu, gọi món rồi thanh toán — vì bạn đã có \"schema nhà hàng\" từ những lần trải nghiệm trước, không cần ai hướng dẫn lại từ đầu."},
+
+{cat:"nhanthuc", vi:"Tư duy", en:"Thinking", short:"Quá trình thao tác các biểu tượng và khái niệm trong đầu để hiểu, lập luận hoặc tạo ra ý tưởng mới.",
+ detail:"Tư duy bao gồm việc hình thành khái niệm, suy luận, tưởng tượng và kết hợp các ý tưởng theo những cách mới. Các nhà tâm lý học chia tư duy thành hai dạng chính: tư duy hội tụ (convergent — tìm một câu trả lời đúng) và tư duy phân kỳ (divergent — tạo ra nhiều khả năng).",
+ example:"Khi giải một bài toán có một đáp số đúng duy nhất, bạn dùng tư duy hội tụ; khi brainstorm nhiều cách dùng khác nhau cho một chiếc kẹp giấy, bạn đang dùng tư duy phân kỳ."},
+
+{cat:"nhanthuc", vi:"Giải quyết vấn đề", en:"Problem solving", short:"Quá trình tìm đường đi từ trạng thái hiện tại đến trạng thái mục tiêu mong muốn.",
+ detail:"Hai chiến lược chính là: thuật toán (algorithm) — quy trình từng bước đảm bảo có kết quả đúng nhưng tốn thời gian; và heuristic — \"luật ngón tay cái\" nhanh, dựa trên kinh nghiệm, thường đúng nhưng không đảm bảo. Đôi khi bế tắc xảy ra do \"cố định chức năng\" (functional fixedness) — chỉ thấy một cách dùng quen thuộc của một vật.",
+ example:"Để tìm chữ trong từ điển: dùng thuật toán là đọc từng trang từ đầu; dùng heuristic là mở ngay đến phần có chữ cái gần đúng — nhanh hơn nhiều và hầu như luôn hiệu quả."},
+
+{cat:"nhanthuc", vi:"Ra quyết định", en:"Decision making", short:"Quá trình lựa chọn giữa các phương án dựa trên đánh giá lợi ích, chi phí và xác suất.",
+ detail:"Theo lý thuyết, con người nên ra quyết định \"hợp lý\" bằng cách cân nhắc đầy đủ thông tin và xác suất. Nhưng thực tế, do giới hạn về thời gian và năng lực xử lý, con người thường dùng \"hợp lý có giới hạn\" (bounded rationality) — dựa vào heuristic và cảm xúc, dẫn đến nhiều thiên kiến hệ thống.",
+ example:"Khi chọn món ăn trong menu dài, thay vì so sánh từng món, nhiều người chỉ đọc 5-6 món đầu rồi chọn món \"đủ tốt\" — đó là quyết định dựa trên giới hạn nhận thức, không phải tối ưu tuyệt đối."},
+
+{cat:"nhanthuc", vi:"Trí thông minh", en:"Intelligence", short:"Khả năng học hỏi từ kinh nghiệm, giải quyết vấn đề và thích nghi với môi trường mới.",
+ detail:"Các nhà tâm lý học tranh luận về việc trí thông minh là một năng lực chung duy nhất (yếu tố g) hay gồm nhiều loại độc lập. Thuyết \"đa trí tuệ\" của Gardner đề xuất nhiều dạng như ngôn ngữ, logic-toán, không gian, vận động, âm nhạc, xã hội... và mỗi người có thể mạnh ở một số dạng khác nhau.",
+ example:"Một người có thể giỏi giải phương trình (trí tuệ logic-toán) nhưng lại lóng ngóng khi đọc cảm xúc của người khác (trí tuệ xã hội thấp hơn) — cho thấy \"thông minh\" không phải một con số đơn lẻ."},
+
+{cat:"nhanthuc", vi:"Sáng tạo", en:"Creativity", short:"Khả năng tạo ra ý tưởng hoặc sản phẩm mới lạ và có giá trị.",
+ detail:"Sáng tạo thường gắn với tư duy phân kỳ — khả năng tạo ra nhiều giải pháp khác nhau cho một vấn đề. Nó không chỉ là \"cảm hứng bất ngờ\" mà thường đến từ quá trình kết hợp lại những kiến thức đã có theo cách mới, thường trải qua các giai đoạn: chuẩn bị, ấp ủ (incubation), bừng sáng (insight) và kiểm chứng.",
+ example:"Nhiều người báo cáo có những ý tưởng hay nhất khi đang tắm hoặc đi bộ — đó là giai đoạn \"ấp ủ\", khi não tiếp tục kết hợp thông tin một cách vô thức sau khi bạn tạm ngừng tập trung có ý thức vào vấn đề."},
+
+{cat:"nhanthuc", vi:"Suy luận", en:"Reasoning", short:"Quá trình rút ra kết luận từ thông tin hoặc tiền đề đã có.",
+ detail:"Suy luận suy diễn (deductive) đi từ quy tắc chung đến kết luận cụ thể, đảm bảo đúng nếu tiền đề đúng. Suy luận quy nạp (inductive) đi từ các quan sát cụ thể để tổng quát hoá quy luật — hữu ích nhưng có thể sai nếu mẫu quan sát không đại diện.",
+ example:"\"Mọi con quạ tôi từng thấy đều màu đen, vậy mọi con quạ đều màu đen\" là suy luận quy nạp — hợp lý nhưng không chắc chắn 100%, vì vẫn có thể tồn tại quạ trắng (do đột biến) mà bạn chưa từng gặp."},
+
+// ===== 2. TRÍ NHỚ =====
+{cat:"trinho", vi:"Trí nhớ ngắn hạn", en:"Short-term memory", short:"Nơi lưu giữ thông tin tạm thời trong khoảng vài giây đến một phút.",
+ detail:"Trí nhớ ngắn hạn có dung lượng rất hạn chế — nghiên cứu cổ điển của Miller cho rằng con người chỉ giữ được khoảng 7±2 đơn vị thông tin cùng lúc. Nếu không được lặp lại hoặc xử lý thêm, thông tin trong trí nhớ ngắn hạn sẽ nhanh chóng biến mất.",
+ example:"Khi ai đó đọc cho bạn một số điện thoại và bạn lặp lại trong đầu để bấm số ngay — nếu bị ai làm gián đoạn giữa đường, bạn rất dễ quên mất số đó hoàn toàn."},
+
+{cat:"trinho", vi:"Trí nhớ dài hạn", en:"Long-term memory", short:"Kho lưu trữ thông tin có dung lượng gần như không giới hạn, kéo dài từ vài giờ đến cả đời.",
+ detail:"Trí nhớ dài hạn được chia thành trí nhớ hiển ngôn (explicit/declarative — sự kiện, kiến thức có thể \"kể lại\") và trí nhớ ẩn ngôn (implicit/procedural — kỹ năng, thói quen làm mà không cần nhớ rõ cách học). Việc chuyển từ trí nhớ ngắn hạn sang dài hạn gọi là củng cố (consolidation).",
+ example:"Bạn có thể không nhớ rõ ai dạy mình đi xe đạp hay từng bước cụ thể (trí nhớ ẩn ngôn), nhưng vẫn nhớ rất rõ ngày tốt nghiệp của mình (trí nhớ hiển ngôn) — cả hai đều là trí nhớ dài hạn nhưng hoạt động khác nhau."},
+
+{cat:"trinho", vi:"Trí nhớ làm việc", en:"Working memory", short:"Hệ thống \"bàn làm việc\" tinh thần, giữ và xử lý thông tin đang dùng ngay lúc đó.",
+ detail:"Khác với trí nhớ ngắn hạn chỉ \"giữ\", trí nhớ làm việc còn \"xử lý\" — nó cho phép bạn vừa lưu thông tin vừa thao tác với nó để hoàn thành một nhiệm vụ. Dung lượng trí nhớ làm việc có liên hệ chặt với khả năng tập trung và thành tích học tập.",
+ example:"Khi tính nhẩm 47 + 38, bạn phải giữ số 47 trong đầu, cộng phần hàng đơn vị, nhớ số dư để cộng vào hàng chục — toàn bộ quá trình \"giữ và xử lý đồng thời\" đó là trí nhớ làm việc."},
+
+{cat:"trinho", vi:"Mã hóa", en:"Encoding", short:"Quá trình chuyển đổi thông tin từ giác quan thành dạng có thể lưu trữ trong trí nhớ.",
+ detail:"Thông tin có thể được mã hóa theo nhiều cách: âm thanh (nghe), hình ảnh (nhìn), hoặc ý nghĩa (semantic). Mã hóa theo ý nghĩa — gắn thông tin mới với kiến thức đã biết — thường tạo ra trí nhớ bền và dễ truy xuất hơn so với chỉ lặp lại máy móc.",
+ example:"Học từ vựng tiếng Anh bằng cách chỉ đọc đi đọc lại (mã hóa âm thanh) thường kém hiệu quả hơn so với việc đặt từ đó vào một câu chuyện hoặc liên tưởng với hình ảnh cụ thể (mã hóa theo ý nghĩa)."},
+
+{cat:"trinho", vi:"Củng cố trí nhớ", en:"Memory consolidation", short:"Quá trình ổn định và lưu giữ lâu dài một ký ức sau khi nó được hình thành.",
+ detail:"Sau khi học, ký ức ban đầu rất \"mong manh\" và dễ bị mất nếu có nhiễu. Củng cố là quá trình sinh học (đặc biệt diễn ra mạnh trong khi ngủ) giúp \"khắc\" thông tin vào mạng lưới thần kinh để nó trở nên ổn định và bền vững hơn.",
+ example:"Học sinh ôn bài rồi đi ngủ sớm thường nhớ bài tốt hơn so với việc thức khuya nhồi nhét — vì giấc ngủ đóng vai trò quan trọng trong việc củng cố những gì vừa học vào trí nhớ dài hạn."},
+
+{cat:"trinho", vi:"Sự quên", en:"Forgetting", short:"Sự mất khả năng truy xuất thông tin đã từng được lưu trữ.",
+ detail:"Quên có thể xảy ra do thông tin bị phân rã theo thời gian (decay), do bị các ký ức khác gây nhiễu (interference), hoặc do không có \"đầu mối\" phù hợp để truy xuất (retrieval failure) dù thông tin vẫn còn đó. Đường cong quên của Ebbinghaus cho thấy phần lớn sự quên xảy ra rất nhanh ngay sau khi học.",
+ example:"Bạn học một danh sách từ vựng và quên gần một nửa chỉ sau 24 giờ nếu không ôn lại — đây chính là hiện tượng được mô tả bởi \"đường cong quên\" nổi tiếng trong tâm lý học."},
+
+{cat:"trinho", vi:"Hiệu ứng vị trí thứ tự", en:"Serial position effect", short:"Xu hướng nhớ tốt hơn các mục ở đầu và cuối một danh sách so với phần giữa.",
+ detail:"Hiệu ứng này gồm hai phần: hiệu ứng đầu (primacy effect) — các mục đầu được lặp lại nhiều và có thời gian chuyển vào trí nhớ dài hạn; và hiệu ứng cuối (recency effect) — các mục cuối vẫn còn trong trí nhớ ngắn hạn lúc nhớ lại.",
+ example:"Khi nghe đọc một danh sách 15 món hàng cần mua, bạn thường nhớ rõ 2-3 món đầu và 2-3 món cuối, nhưng dễ quên những món ở giữa danh sách."},
+
+{cat:"trinho", vi:"Trí nhớ tường thuật và thủ tục", en:"Declarative vs procedural memory", short:"Hai hệ thống trí nhớ dài hạn: \"biết cái gì\" và \"biết làm thế nào\".",
+ detail:"Trí nhớ tường thuật (declarative) lưu giữ sự kiện và kiến thức có thể diễn đạt bằng lời — như ngày sinh, công thức toán. Trí nhớ thủ tục (procedural) lưu giữ kỹ năng vận động và thói quen, thường được thực hiện một cách tự động, khó diễn đạt bằng lời.",
+ example:"Bạn có thể giải thích bằng lời quy tắc giao thông (trí nhớ tường thuật) nhưng việc giữ thăng bằng khi đi xe máy lại là thứ tay và chân \"nhớ\" mà không cần suy nghĩ (trí nhớ thủ tục)."},
+
+{cat:"trinho", vi:"Hồi tưởng và nhận biết", en:"Recall vs recognition", short:"Hai cách truy xuất trí nhớ: tự tạo lại thông tin và nhận ra thông tin khi thấy lại.",
+ detail:"Hồi tưởng (recall) là khi bạn phải tự lấy thông tin ra từ trí nhớ mà không có gợi ý — khó hơn. Nhận biết (recognition) là khi bạn chỉ cần xác định xem một thông tin có quen thuộc hay không khi nó được trình bày lại — dễ hơn vì có sẵn đầu mối.",
+ example:"Đề thi tự luận yêu cầu hồi tưởng (\"Hãy trình bày...\"), khó hơn nhiều so với đề thi trắc nghiệm chỉ yêu cầu nhận biết đáp án đúng trong số các lựa chọn cho sẵn."},
+
+{cat:"trinho", vi:"Sự nhiễu trí nhớ", en:"Interference", short:"Hiện tượng các ký ức cạnh tranh hoặc làm rối loạn lẫn nhau, gây khó nhớ hoặc nhớ sai.",
+ detail:"Nhiễu thuận (proactive interference) là khi thông tin cũ cản trở việc học thông tin mới. Nhiễu nghịch (retroactive interference) là khi thông tin mới học làm rối loạn việc nhớ lại thông tin cũ. Đây là một trong những nguyên nhân chính của sự quên.",
+ example:"Khi bạn đổi số điện thoại mới, trong một thời gian bạn vẫn buột miệng đọc số cũ (nhiễu thuận); và sau khi đã quen số mới, bạn lại khó nhớ chính xác số cũ (nhiễu nghịch)."},
+
+// ===== 3. HỌC TẬP =====
+{cat:"hoctap", vi:"Điều kiện hóa cổ điển", en:"Classical conditioning", short:"Học cách liên kết hai kích thích, để một kích thích trung lập tạo ra phản ứng giống kích thích kia.",
+ detail:"Được Pavlov phát hiện qua thí nghiệm với chó: một kích thích trung lập (tiếng chuông) khi được lặp lại nhiều lần cùng với một kích thích vốn đã gây phản ứng tự nhiên (thức ăn → tiết nước bọt), dần dần tự nó cũng gây ra phản ứng đó, dù không còn thức ăn.",
+ example:"Nếu mỗi lần mở một ứng dụng điện thoại bạn lại nghe một âm báo đặc trưng, sau một thời gian chỉ cần nghe âm đó (ở bất kỳ đâu) bạn cũng có cảm giác muốn kiểm tra điện thoại — dù không có thông báo thật."},
+
+{cat:"hoctap", vi:"Điều kiện hóa từ kết quả", en:"Operant conditioning", short:"Học hành vi thông qua hệ quả: hành vi được thưởng có xu hướng lặp lại, bị phạt có xu hướng giảm.",
+ detail:"Khái niệm này do Skinner phát triển: hành vi không chỉ là phản ứng với kích thích mà còn được \"định hình\" bởi những gì xảy ra sau nó. Nếu một hành vi dẫn đến kết quả tích cực (củng cố), nó có xu hướng được lặp lại nhiều hơn; nếu dẫn đến kết quả tiêu cực, nó có xu hướng giảm.",
+ example:"Một nhân viên được khen ngợi mỗi khi hoàn thành báo cáo đúng hạn sẽ có xu hướng tiếp tục nộp đúng hạn — hành vi được duy trì vì hệ quả tích cực theo sau nó."},
+
+{cat:"hoctap", vi:"Sự củng cố", en:"Reinforcement", short:"Bất kỳ điều gì làm tăng khả năng một hành vi sẽ được lặp lại trong tương lai.",
+ detail:"Củng cố dương (positive reinforcement) là thêm vào một điều gì đó dễ chịu sau hành vi (ví dụ: phần thưởng). Củng cố âm (negative reinforcement) là loại bỏ một điều gì đó khó chịu sau hành vi (ví dụ: giảm áp lực). Cả hai đều làm tăng khả năng hành vi lặp lại — điểm khác biệt là \"thêm vào\" hay \"lấy đi\".",
+ example:"Uống thuốc giảm đau khi đang đau đầu khiến cơn đau biến mất — sự \"biến mất cảm giác khó chịu\" này là củng cố âm, khiến bạn có xu hướng uống thuốc ngay khi đau đầu lần sau."},
+
+{cat:"hoctap", vi:"Sự trừng phạt", en:"Punishment", short:"Bất kỳ hệ quả nào làm giảm khả năng một hành vi sẽ tái diễn.",
+ detail:"Trừng phạt dương là thêm một điều khó chịu sau hành vi (ví dụ: bị phạt tiền). Trừng phạt âm là lấy đi một điều dễ chịu (ví dụ: tịch thu điện thoại). Trừng phạt có thể làm giảm hành vi nhanh nhưng thường kém hiệu quả lâu dài hơn củng cố, và có thể gây ra tác dụng phụ về cảm xúc như lo lắng hay né tránh.",
+ example:"Một đứa trẻ bị tịch thu đồ chơi (lấy đi điều dễ chịu = trừng phạt âm) sau khi đánh em có thể tạm ngừng đánh em trước mặt người lớn, nhưng chưa chắc thực sự hiểu hay thay đổi mong muốn bên trong."},
+
+{cat:"hoctap", vi:"Học tập qua quan sát", en:"Observational learning", short:"Học một hành vi mới bằng cách quan sát người khác thực hiện, không cần tự trải nghiệm hệ quả.",
+ detail:"Được Bandura nghiên cứu qua thí nghiệm \"con búp bê Bobo\": trẻ em có xu hướng bắt chước hành vi (cả tích cực và tiêu cực) mà chúng quan sát từ người khác, đặc biệt là những \"hình mẫu\" mà chúng yêu thích hoặc tôn trọng — gọi là học qua mô hình hóa (modeling).",
+ example:"Một đứa trẻ thấy bố mẹ luôn nói \"làm ơn\" và \"cảm ơn\" khi nhờ việc sẽ có xu hướng tự nhiên nói những câu đó với người khác, dù chưa từng được dạy trực tiếp — chỉ qua việc quan sát và bắt chước."},
+
+{cat:"hoctap", vi:"Khái quát hóa kích thích", en:"Stimulus generalization", short:"Xu hướng phản ứng giống nhau với các kích thích tương tự với kích thích đã được điều kiện hóa.",
+ detail:"Sau khi học được một phản ứng với một kích thích cụ thể, con người (và động vật) có xu hướng phản ứng tương tự với những kích thích khác có đặc điểm giống nó, dù chưa từng \"học\" trực tiếp với kích thích mới đó.",
+ example:"Một người từng bị một con chó lớn màu nâu cắn có thể thấy sợ hãi khi gặp bất kỳ con chó to nào, kể cả những con hiền lành — nỗi sợ đã \"lan\" từ một kích thích cụ thể sang một nhóm kích thích tương tự."},
+
+{cat:"hoctap", vi:"Sự dập tắt", en:"Extinction", short:"Sự suy yếu và biến mất dần của một phản ứng đã học khi không còn được củng cố.",
+ detail:"Trong điều kiện hóa cổ điển, dập tắt xảy ra khi kích thích có điều kiện được lặp lại nhiều lần mà không còn kích thích vô điều kiện đi kèm. Trong điều kiện hóa từ kết quả, dập tắt xảy ra khi hành vi không còn nhận được củng cố. Tuy nhiên, phản ứng đã dập tắt có thể \"hồi sinh tự phát\" (spontaneous recovery) sau một thời gian.",
+ example:"Nếu một con chó được dạy \"ngồi\" để nhận thưởng, nhưng sau đó người chủ ngừng cho thưởng mỗi khi nó ngồi, hành vi \"ngồi theo lệnh\" sẽ dần biến mất — đó là sự dập tắt."},
+
+{cat:"hoctap", vi:"Học không bất lực", en:"Learned helplessness", short:"Trạng thái thụ động, ngừng cố gắng sau khi nhiều lần trải nghiệm những điều tiêu cực không thể kiểm soát.",
+ detail:"Khi một người (hoặc động vật) liên tục gặp phải kết quả tiêu cực dù làm gì cũng không thay đổi được tình hình, họ dần \"học\" rằng nỗ lực là vô nghĩa và ngừng cố gắng — kể cả khi sau đó tình huống thực sự có thể thay đổi được. Khái niệm này có liên hệ chặt với một số dạng trầm cảm.",
+ example:"Một học sinh liên tục bị điểm kém dù học chăm chỉ đến mức nào có thể dần ngừng học bài hoàn toàn, không phải vì lười, mà vì đã \"học được\" rằng nỗ lực của mình không tạo ra khác biệt."},
+
+{cat:"hoctap", vi:"Tạo hình hành vi", en:"Shaping", short:"Dạy một hành vi phức tạp bằng cách củng cố từng bước nhỏ tiến dần đến hành vi mục tiêu.",
+ detail:"Thay vì chờ đến khi hành vi mục tiêu xuất hiện hoàn chỉnh (điều có thể không bao giờ xảy ra một cách tự nhiên), shaping củng cố những hành vi \"gần đúng\" theo từng bước nhỏ, dần dần nâng cao tiêu chuẩn cho đến khi đạt được hành vi cuối cùng mong muốn.",
+ example:"Để dạy một con cá heo nhảy qua vòng, người huấn luyện đầu tiên thưởng khi nó chỉ bơi gần vòng, sau đó thưởng khi nó chạm vào vòng, rồi mới thưởng khi nó thực sự nhảy qua — từng bước nhỏ được củng cố để xây thành hành vi cuối."},
+
+{cat:"hoctap", vi:"Lịch trình củng cố", en:"Schedules of reinforcement", short:"Các quy luật khác nhau về thời điểm và tần suất một hành vi được củng cố, ảnh hưởng đến độ bền của hành vi.",
+ detail:"Củng cố liên tục (mỗi lần đều thưởng) giúp học nhanh nhưng dễ mất hành vi nhanh khi ngừng thưởng. Củng cố theo tỷ lệ thay đổi (variable ratio — thưởng sau một số lần phản ứng không cố định) tạo ra hành vi bền và khó dập tắt nhất, vì người/vật không bao giờ biết chắc lần nào sẽ được thưởng.",
+ example:"Máy đánh bạc (slot machine) hoạt động theo lịch trình tỷ lệ thay đổi — người chơi không biết lần kéo nào sẽ thắng, và chính sự không chắc chắn đó khiến hành vi \"kéo cần\" rất khó dừng lại, dù phần lớn các lần đều thua."},
+
+// ===== 4. PHÁT TRIỂN =====
+{cat:"phattrien", vi:"Các giai đoạn phát triển nhận thức (Piaget)", en:"Piaget's stages", short:"Lý thuyết cho rằng trẻ em trải qua các giai đoạn phát triển tư duy khác biệt về chất, không chỉ về lượng.",
+ detail:"Piaget đề xuất 4 giai đoạn: vận động cảm giác (0-2 tuổi, hiểu thế giới qua giác quan và vận động), tiền thao tác (2-7 tuổi, tư duy bằng biểu tượng nhưng chưa logic), thao tác cụ thể (7-11 tuổi, hiểu logic với vật cụ thể), và thao tác hình thức (11+ tuổi, suy luận trừu tượng). Trẻ em không chỉ \"biết ít hơn\" người lớn mà thực sự suy nghĩ theo cách khác.",
+ example:"Một trẻ ở giai đoạn tiền thao tác có thể tin rằng một lượng nước trông \"nhiều hơn\" khi đổ từ cốc thấp-rộng sang cốc cao-hẹp, vì chưa hiểu khái niệm \"bảo toàn lượng\" (conservation) — điều mà trẻ ở giai đoạn thao tác cụ thể đã nắm được."},
+
+{cat:"phattrien", vi:"Lý thuyết gắn bó", en:"Attachment theory", short:"Mối liên kết cảm xúc bền chặt giữa trẻ và người chăm sóc chính, ảnh hưởng đến các mối quan hệ sau này.",
+ detail:"Bowlby và Ainsworth cho rằng kiểu gắn bó hình thành trong những năm đầu đời (an toàn, lo lắng-né tránh, lo lắng-mâu thuẫn...) tạo nên một \"mô hình làm việc\" về việc các mối quan hệ có đáng tin cậy hay không, và có thể ảnh hưởng đến cách một người yêu, tin tưởng và gắn kết trong các mối quan hệ trưởng thành.",
+ example:"Một trẻ có gắn bó an toàn thường khóc khi mẹ rời đi nhưng nhanh chóng bình tĩnh và tiếp tục chơi khi mẹ trở lại — cho thấy trẻ tin rằng người chăm sóc đáng tin cậy và sẽ quay lại."},
+
+{cat:"phattrien", vi:"Vùng phát triển gần", en:"Zone of proximal development", short:"Khoảng cách giữa những gì người học có thể làm một mình và những gì họ có thể làm với sự hỗ trợ.",
+ detail:"Vygotsky cho rằng học tập hiệu quả nhất xảy ra trong \"vùng\" này — không quá dễ (đã tự làm được) và không quá khó (vẫn không làm được dù có hỗ trợ). Sự hỗ trợ phù hợp (gọi là \"giàn giáo\" — scaffolding) giúp người học dần dần tự làm được những việc trước đây cần trợ giúp.",
+ example:"Một đứa trẻ chưa thể tự buộc dây giày, nhưng nếu người lớn hướng dẫn từng bước và hỗ trợ phần khó, trẻ có thể hoàn thành — sau nhiều lần được \"giàn giáo\" như vậy, trẻ sẽ tự buộc được mà không cần giúp."},
+
+{cat:"phattrien", vi:"Các giai đoạn tâm lý xã hội (Erikson)", en:"Erikson's psychosocial stages", short:"Lý thuyết cho rằng mỗi giai đoạn cuộc đời gắn với một \"khủng hoảng\" tâm lý xã hội cần được giải quyết.",
+ detail:"Erikson đề xuất 8 giai đoạn từ sơ sinh đến tuổi già, mỗi giai đoạn là một cặp đối lập cần được cân bằng, ví dụ: tin tưởng vs nghi ngờ (sơ sinh), độc lập vs xấu hổ (tuổi nhỏ), bản sắc vs hỗn loạn vai trò (vị thành niên), gắn kết vs cô lập (trưởng thành trẻ)... Cách giải quyết mỗi giai đoạn ảnh hưởng đến sự phát triển tiếp theo.",
+ example:"Một thanh thiếu niên dành thời gian thử nghiệm các sở thích, giá trị và vai trò khác nhau để tìm ra \"mình là ai\" đang trải qua khủng hoảng bản sắc vs hỗn loạn vai trò — giai đoạn trung tâm của tuổi vị thành niên theo Erikson."},
+
+{cat:"phattrien", vi:"Tính ổn định của đối tượng", en:"Object permanence", short:"Khả năng hiểu rằng một vật thể vẫn tồn tại dù không còn nhìn thấy hoặc nghe thấy nó.",
+ detail:"Đây là một cột mốc phát triển quan trọng theo Piaget, thường xuất hiện vào khoảng 8 tháng tuổi. Trước khi đạt được khả năng này, trẻ sơ sinh hành xử như thể \"ngoài tầm mắt là không tồn tại\" — một vật bị che đi đơn giản là biến mất với trẻ.",
+ example:"Trò chơi \"ú... à\" (peekaboo) thú vị với trẻ sơ sinh một phần vì trước khi có tính ổn định đối tượng, khuôn mặt biến mất sau hai tay rồi xuất hiện lại thực sự gây ngạc nhiên — với trẻ, đó như là một sự \"tái xuất hiện\" kỳ diệu."},
+
+{cat:"phattrien", vi:"Bản chất và nuôi dưỡng", en:"Nature vs nurture", short:"Cuộc tranh luận về vai trò tương đối của gen (di truyền) và môi trường trong việc hình thành con người.",
+ detail:"Ngày nay hầu hết các nhà tâm lý học đồng ý rằng cả gen và môi trường đều quan trọng và tương tác với nhau (gọi là \"epigenetics\" — biểu hiện gen có thể bị ảnh hưởng bởi môi trường), thay vì là hai phe đối lập tách biệt. Câu hỏi thường được đặt lại thành: \"chúng tương tác với nhau như thế nào\" thay vì \"cái nào quan trọng hơn\".",
+ example:"Một trẻ có gen liên quan đến chiều cao vượt trội (bản chất) chỉ thực sự đạt được tiềm năng đó nếu được nuôi dưỡng đầy đủ dinh dưỡng (nuôi dưỡng) — thiếu một trong hai, kết quả cuối cùng sẽ khác."},
+
+{cat:"phattrien", vi:"Khí chất", en:"Temperament", short:"Những đặc điểm phản ứng cảm xúc và hành vi có nền tảng sinh học, xuất hiện từ rất sớm trong đời.",
+ detail:"Khí chất được coi là \"nguyên liệu thô\" ban đầu mà nhân cách sẽ được xây dựng lên trên đó qua kinh nghiệm sống. Các nhà nghiên cứu thường phân loại trẻ sơ sinh theo các kiểu khí chất như \"dễ tính\", \"khó tính\" hoặc \"chậm thích nghi\" dựa trên mức độ hoạt động, khả năng thích nghi và phản ứng cảm xúc.",
+ example:"Hai trẻ sơ sinh trong cùng một gia đình có thể phản ứng rất khác nhau với một âm thanh lớn — một bé giật mình rồi khóc dai dẳng, bé khác chỉ hơi chú ý rồi quay lại bình thường — sự khác biệt này thường xuất hiện ngay từ những tuần đầu, phản ánh khí chất bẩm sinh."},
+
+{cat:"phattrien", vi:"Lý thuyết tâm trí", en:"Theory of mind", short:"Khả năng hiểu rằng người khác có suy nghĩ, niềm tin, mong muốn riêng — khác với của mình.",
+ detail:"Khả năng này thường phát triển rõ rệt vào khoảng 4 tuổi và là nền tảng cho sự đồng cảm, giao tiếp xã hội và \"đọc\" được ý định của người khác. Trẻ thiếu lý thuyết tâm trí thường nghĩ rằng người khác biết những gì mình biết, dù người đó không có cơ hội quan sát.",
+ example:"Trong bài kiểm tra kinh điển: trẻ thấy một viên kẹo được giấu vào hộp A, sau đó bạn của trẻ ra ngoài và viên kẹo được chuyển sang hộp B. Trẻ có lý thuyết tâm trí phát triển sẽ đoán bạn mình sẽ tìm ở hộp A (vì bạn không thấy việc chuyển kẹo) — trong khi trẻ nhỏ hơn thường trả lời hộp B, vì đó là nơi kẹo \"thực sự\" đang ở."},
+
+{cat:"phattrien", vi:"Khủng hoảng bản sắc", en:"Identity vs role confusion", short:"Giai đoạn tuổi vị thành niên khi cá nhân tìm kiếm câu trả lời cho câu hỏi \"tôi là ai\".",
+ detail:"Đây là giai đoạn thứ năm trong lý thuyết của Erikson. Thanh thiếu niên thử nghiệm các vai trò, niềm tin, giá trị khác nhau (về nghề nghiệp, chính trị, tôn giáo, tình yêu...) để xây dựng một bản sắc cá nhân nhất quán. Nếu không giải quyết tốt, có thể dẫn đến sự hỗn loạn vai trò — cảm giác mơ hồ, không biết mình thuộc về đâu.",
+ example:"Một thiếu niên thử nhiều phong cách ăn mặc, nhóm bạn, sở thích âm nhạc khác nhau trong vài năm trước khi \"ổn định\" với một hình ảnh bản thân tương đối nhất quán — đó là quá trình bình thường của việc xây dựng bản sắc."},
+
+{cat:"phattrien", vi:"Phát triển đạo đức (Kohlberg)", en:"Kohlberg's moral development", short:"Lý thuyết về các giai đoạn phát triển khả năng suy luận về đúng-sai theo các nguyên tắc ngày càng phức tạp.",
+ detail:"Kohlberg đề xuất 3 cấp độ: tiền đạo đức (dựa trên thưởng/phạt), đạo đức theo quy ước (dựa trên việc tuân theo luật lệ và được xã hội chấp nhận), và đạo đức theo nguyên tắc (dựa trên các nguyên tắc đạo đức phổ quát, có thể vượt qua cả luật pháp nếu luật đó bất công). Điều quan trọng không phải là \"câu trả lời\" mà là \"lý do\" đưa ra cho câu trả lời.",
+ example:"Khi được hỏi \"có nên ăn cắp thuốc để cứu người vợ đang bệnh nặng không\", một người ở cấp độ tiền đạo đức có thể trả lời dựa trên việc \"có bị bắt không\"; người ở cấp độ nguyên tắc có thể trả lời dựa trên việc \"sinh mạng con người quan trọng hơn quyền sở hữu tài sản\" — dù câu trả lời cuối có thể giống nhau, lý do hoàn toàn khác."},
+
+// ===== 5. NHÂN CÁCH =====
+{cat:"nhancach", vi:"Mô hình Big Five", en:"Big Five personality traits", short:"Mô hình 5 đặc điểm nhân cách cốt lõi được nghiên cứu rộng rãi nhất hiện nay.",
+ detail:"Năm đặc điểm là: Cởi mở với trải nghiệm (Openness), Tận tâm (Conscientiousness), Hướng ngoại (Extraversion), Hòa đồng (Agreeableness) và Bất ổn cảm xúc (Neuroticism) — viết tắt OCEAN. Mỗi người nằm ở một vị trí nào đó trên mỗi thang đo này, tạo nên một \"hồ sơ\" nhân cách tương đối ổn định theo thời gian.",
+ example:"Một người có điểm Tận tâm cao thường lập kế hoạch kỹ, đúng giờ và có tổ chức; điểm Hướng ngoại cao thường thích giao tiếp và năng động trong môi trường xã hội — hai đặc điểm này độc lập với nhau, một người có thể vừa tận tâm vừa hướng nội."},
+
+{cat:"nhancach", vi:"Phân tâm học", en:"Psychoanalysis (Freud)", short:"Lý thuyết của Freud cho rằng hành vi con người chịu ảnh hưởng lớn từ các động lực và xung đột vô thức.",
+ detail:"Freud cho rằng phần lớn đời sống tinh thần diễn ra ở tầng vô thức, nơi chứa những mong muốn, ký ức và xung đột mà ý thức không tiếp cận trực tiếp được nhưng vẫn ảnh hưởng đến suy nghĩ, cảm xúc và hành vi. Lý thuyết này đã bị chỉ trích nhiều về tính khoa học, nhưng vẫn có ảnh hưởng lớn đến văn hóa và một số trường phái trị liệu.",
+ example:"Một người \"lỡ lời\" gọi tên người yêu cũ trong lúc nói chuyện với người yêu mới — Freud gọi đây là \"lỡ lời Freud\" (Freudian slip), cho rằng đó là dấu hiệu của một suy nghĩ vô thức \"trồi lên\" qua lời nói."},
+
+{cat:"nhancach", vi:"Vô thức", en:"Unconscious mind", short:"Phần của tâm trí chứa những suy nghĩ, ký ức và động lực mà ta không nhận thức được một cách trực tiếp.",
+ detail:"Khái niệm vô thức không còn chỉ giới hạn trong phân tâm học — tâm lý học nhận thức hiện đại cũng công nhận rằng rất nhiều quá trình xử lý thông tin (như nhận diện khuôn mặt, hình thành thiên kiến, kiểm soát kỹ năng đã thành thục) diễn ra mà không cần ý thức tham gia.",
+ example:"Khi lái xe trên một tuyến đường quen thuộc, bạn có thể về đến nhà mà không nhớ rõ chi tiết từng đoạn đường đã đi — phần lớn quá trình lái xe đã diễn ra ở mức độ tự động, ngoài ý thức tập trung."},
+
+{cat:"nhancach", vi:"Cơ chế phòng vệ", en:"Defense mechanisms", short:"Các chiến lược tâm lý vô thức giúp giảm lo âu bằng cách bóp méo hoặc tránh đối mặt với thực tế khó chịu.",
+ detail:"Một số cơ chế phổ biến: kìm nén (đẩy suy nghĩ khó chịu ra khỏi ý thức), phóng chiếu (gán đặc điểm của mình cho người khác), hợp lý hóa (tìm lý do \"nghe có lý\" để biện minh), thăng hoa (chuyển hướng năng lượng tiêu cực sang hoạt động tích cực). Dùng vừa phải có thể giúp ứng phó, nhưng lạm dụng có thể cản trở việc giải quyết vấn đề thực sự.",
+ example:"Một người vừa bị sa thải nhưng nói với bạn bè rằng \"công việc đó dù sao cũng không phù hợp với tôi\" có thể đang dùng cơ chế hợp lý hóa để giảm cảm giác đau đớn trước thất bại."},
+
+{cat:"nhancach", vi:"Tự thực hiện hóa", en:"Self-actualization", short:"Trạng thái phát huy tối đa tiềm năng và trở thành phiên bản đầy đủ nhất của chính mình.",
+ detail:"Maslow coi tự thực hiện hóa là nhu cầu cao nhất trong tháp nhu cầu, chỉ có thể hướng tới khi các nhu cầu cơ bản hơn (sinh lý, an toàn, xã hội, được tôn trọng) đã được đáp ứng tương đối đầy đủ. Người tự thực hiện hóa thường được mô tả là chấp nhận bản thân, sáng tạo, và theo đuổi những giá trị có ý nghĩa với riêng họ.",
+ example:"Một người từ bỏ một công việc lương cao nhưng nhàm chán để theo đuổi nghệ thuật — vì với họ, công việc cũ không còn đáp ứng nhu cầu được \"sống đúng với tiềm năng và giá trị của bản thân\"."},
+
+{cat:"nhancach", vi:"Tháp nhu cầu Maslow", en:"Maslow's hierarchy of needs", short:"Mô hình phân loại nhu cầu con người theo thứ bậc, từ cơ bản nhất đến cao cấp nhất.",
+ detail:"Theo thứ tự từ đáy lên: nhu cầu sinh lý (ăn, ngủ), an toàn, xã hội (thuộc về, yêu thương), được tôn trọng (công nhận, tự tin), và tự thực hiện hóa. Maslow cho rằng các nhu cầu ở mức thấp thường phải được đáp ứng tương đối trước khi một người có thể tập trung mạnh vào nhu cầu ở mức cao hơn — tuy thực tế không hoàn toàn cứng nhắc theo thứ tự này.",
+ example:"Một người đang lo lắng về việc có đủ tiền trả tiền nhà tháng này (nhu cầu an toàn) sẽ khó có thể dành tâm trí để theo đuổi một dự án sáng tạo cá nhân (nhu cầu tự thực hiện hóa) — các nhu cầu cấp thấp đang \"chiếm chỗ\"."},
+
+{cat:"nhancach", vi:"Vị trí kiểm soát", en:"Locus of control", short:"Niềm tin của một người về việc kết quả trong đời mình do bản thân hay do các yếu tố bên ngoài quyết định.",
+ detail:"Người có vị trí kiểm soát nội tại (internal) tin rằng kết quả phụ thuộc chủ yếu vào nỗ lực và quyết định của bản thân. Người có vị trí kiểm soát bên ngoài (external) tin rằng kết quả chủ yếu do may mắn, số phận hoặc người khác quyết định. Vị trí kiểm soát nội tại thường (nhưng không luôn) liên quan đến động lực và sức khỏe tâm lý tốt hơn.",
+ example:"Khi thi trượt, một người có vị trí kiểm soát nội tại có thể nghĩ \"mình cần ôn kỹ hơn lần sau\", trong khi người có vị trí kiểm soát bên ngoài có thể nghĩ \"đề thi quá khó\" hoặc \"mình chỉ xui xẻo\"."},
+
+{cat:"nhancach", vi:"Id - Ego - Superego", en:"Id, Ego, Superego", short:"Ba thành phần của nhân cách theo Freud, đại diện cho bản năng, lý trí và lương tâm.",
+ detail:"Id là phần bản năng, tìm kiếm sự thỏa mãn ngay lập tức (nguyên tắc khoái lạc). Superego là phần lương tâm, đại diện cho các giá trị đạo đức và chuẩn mực xã hội đã được nội tâm hóa. Ego là \"người trung gian\" thực tế, cố gắng đáp ứng các đòi hỏi của Id theo cách được Superego chấp nhận và phù hợp với thực tế.",
+ example:"Khi đói bụng giữa một cuộc họp quan trọng: Id muốn ăn ngay lập tức; Superego nhắc rằng ăn giữa cuộc họp là thiếu lịch sự; Ego đưa ra giải pháp thực tế — chịu đói thêm một chút và ăn ngay khi cuộc họp kết thúc."},
+
+{cat:"nhancach", vi:"Niềm tin về năng lực bản thân", en:"Self-efficacy", short:"Niềm tin của một người vào khả năng của chính mình để hoàn thành một nhiệm vụ hoặc đạt được một mục tiêu cụ thể.",
+ detail:"Được Bandura phát triển, self-efficacy khác với sự tự tin chung — nó cụ thể theo từng lĩnh vực (một người có thể có self-efficacy cao về nấu ăn nhưng thấp về thuyết trình). Self-efficacy cao có liên quan đến việc dám đặt mục tiêu khó hơn, kiên trì hơn khi gặp khó khăn, và ít lo lắng hơn khi đối mặt với thử thách.",
+ example:"Hai nhân viên cùng được giao một dự án khó: người có self-efficacy cao về kỹ năng này có xu hướng chủ động tìm cách giải quyết khi gặp trở ngại, trong khi người có self-efficacy thấp dễ bỏ cuộc sớm vì nghĩ \"mình không làm được đâu\"."},
+
+{cat:"nhancach", vi:"Khái niệm bản thân", en:"Self-concept", short:"Tổng hợp các niềm tin, nhận thức và đánh giá của một người về chính bản thân mình.",
+ detail:"Khái niệm bản thân bao gồm cả \"bản thân thực tế\" (mình hiện đang như thế nào) và \"bản thân lý tưởng\" (mình muốn trở thành như thế nào). Khoảng cách lớn giữa hai phần này có thể gây ra cảm giác bất mãn hoặc lo âu, theo lý thuyết của Carl Rogers.",
+ example:"Một người tự nhận thấy mình \"là người hay trì hoãn\" (bản thân thực tế) nhưng mong muốn trở thành \"người có kỷ luật cao\" (bản thân lý tưởng) — khoảng cách giữa hai hình ảnh này có thể là động lực thay đổi, nhưng nếu quá lớn cũng có thể gây căng thẳng tâm lý."},
+
+// ===== 6. TÂM LÝ XÃ HỘI =====
+{cat:"xahoi", vi:"Sự tuân thủ", en:"Conformity", short:"Xu hướng thay đổi hành vi hoặc quan điểm của mình để phù hợp với chuẩn mực của nhóm.",
+ detail:"Thí nghiệm kinh điển của Solomon Asch cho thấy nhiều người sẵn sàng đưa ra câu trả lời mà họ biết là sai chỉ vì tất cả những người khác trong nhóm cũng trả lời như vậy. Tuân thủ có thể xảy ra vì muốn được nhóm chấp nhận (tuân thủ chuẩn mực) hoặc vì tin rằng nhóm có thông tin đúng hơn mình (tuân thủ thông tin).",
+ example:"Trong thí nghiệm Asch, người tham gia được yêu cầu so sánh độ dài các đoạn thẳng — khi tất cả những người khác (thực ra là người được sắp xếp) cố tình đưa ra câu trả lời sai rõ ràng, nhiều người tham gia thực sự cũng chọn câu trả lời sai đó theo số đông, dù bằng mắt thường có thể thấy rõ là sai."},
+
+{cat:"xahoi", vi:"Sự vâng lời", en:"Obedience", short:"Xu hướng làm theo yêu cầu hoặc lệnh của một người có thẩm quyền, ngay cả khi điều đó đi ngược lại giá trị cá nhân.",
+ detail:"Thí nghiệm gây tranh cãi của Milgram cho thấy phần lớn người tham gia sẵn sàng tiếp tục gây ra điều mà họ tin là gây đau đớn nghiêm trọng cho người khác, chỉ vì một người mặc áo blouse trắng (đại diện cho thẩm quyền khoa học) yêu cầu họ tiếp tục — cho thấy thẩm quyền có thể vượt qua lương tâm cá nhân trong nhiều trường hợp.",
+ example:"Nhiều vụ việc trong lịch sử, người thực hiện hành vi gây hại cho biết họ \"chỉ làm theo lệnh\" của cấp trên — đây là cách giải thích phổ biến mà nghiên cứu của Milgram giúp lý giải về mặt tâm lý (không phải để biện minh đạo đức)."},
+
+{cat:"xahoi", vi:"Hiệu ứng người đứng nhìn", en:"Bystander effect", short:"Xu hướng một người ít có khả năng giúp đỡ khi có nhiều người khác cũng đang chứng kiến tình huống.",
+ detail:"Nguyên nhân chính là sự \"khuếch tán trách nhiệm\" (diffusion of responsibility) — mỗi người nghĩ \"chắc người khác sẽ giúp\", nên trách nhiệm cá nhân giảm đi khi số người chứng kiến tăng lên. Nghịch lý là: một người gặp nạn ở nơi đông người lại có ít khả năng được giúp hơn so với khi chỉ có một người chứng kiến.",
+ example:"Khi một người bị ngã trên phố đông, nhiều người đi qua có thể chỉ nhìn rồi tiếp tục đi, mỗi người nghĩ \"đã có người khác lo\" — nhưng nếu chỉ có một người duy nhất chứng kiến, người đó thường sẽ dừng lại giúp ngay."},
+
+{cat:"xahoi", vi:"Tư duy nhóm", en:"Groupthink", short:"Xu hướng các nhóm đưa ra quyết định kém vì ưu tiên sự đồng thuận hơn là đánh giá thực tế một cách khách quan.",
+ detail:"Groupthink thường xảy ra trong các nhóm gắn kết cao, có lãnh đạo mạnh và bị cô lập với các quan điểm bên ngoài. Các thành viên có thể tự kiểm duyệt ý kiến phản đối, tạo cảm giác \"nhất trí ảo\" và đánh giá thấp các rủi ro — dẫn đến những quyết định tập thể tệ hơn so với khi từng cá nhân tự quyết định riêng.",
+ example:"Một nhóm dự án đồng ý triển khai một kế hoạch rủi ro mà gần như không ai trong nhóm thực sự hoàn toàn tin tưởng, vì không ai muốn là người \"phá vỡ không khí đồng thuận\" bằng cách lên tiếng phản đối."},
+
+{cat:"xahoi", vi:"Định kiến và khuôn mẫu", en:"Prejudice & stereotype", short:"Thái độ tiêu cực (định kiến) và niềm tin khái quát hóa quá mức (khuôn mẫu) về một nhóm người.",
+ detail:"Khuôn mẫu (stereotype) là niềm tin tổng quát — thường quá đơn giản — gán cho tất cả thành viên của một nhóm những đặc điểm giống nhau. Định kiến (prejudice) là thái độ cảm xúc tiêu cực dựa trên những niềm tin đó, thường hình thành trước khi có bất kỳ tương tác thực tế với cá nhân thuộc nhóm đó.",
+ example:"Nếu ai đó tin rằng \"tất cả người ở vùng X đều lười biếng\" (khuôn mẫu) và vì vậy cảm thấy ác cảm với một người chỉ vì biết họ đến từ vùng X (định kiến), đó là ví dụ về việc một niềm tin khái quát hóa dẫn đến cảm xúc tiêu cực đối với cá nhân, dù chưa hề tiếp xúc."},
+
+{cat:"xahoi", vi:"Lý thuyết quy kết", en:"Attribution theory", short:"Lý thuyết về cách con người giải thích nguyên nhân hành vi của mình và của người khác.",
+ detail:"Quy kết bên trong (dispositional) cho rằng hành vi xuất phát từ tính cách, đặc điểm cá nhân. Quy kết bên ngoài (situational) cho rằng hành vi xuất phát từ tình huống, hoàn cảnh. Cách chúng ta quy kết ảnh hưởng lớn đến cảm xúc và phản ứng của ta đối với hành vi đó.",
+ example:"Nếu một đồng nghiệp đi làm muộn, quy kết bên trong là \"anh ấy là người vô tổ chức\"; quy kết bên ngoài là \"chắc anh ấy gặp tắc đường\" — cùng một hành vi nhưng hai cách giải thích dẫn đến hai cảm xúc và phản ứng rất khác nhau."},
+
+{cat:"xahoi", vi:"Bất hòa nhận thức", en:"Cognitive dissonance", short:"Cảm giác khó chịu khi một người có hai niềm tin, hoặc niềm tin và hành vi, mâu thuẫn với nhau.",
+ detail:"Để giảm sự khó chịu này, con người thường thay đổi một trong hai yếu tố mâu thuẫn — thường là thay đổi niềm tin (vì hành vi đã xảy ra rồi, khó \"hoàn tác\") để nó phù hợp hơn với hành vi đã thực hiện. Lý thuyết này do Leon Festinger đề xuất.",
+ example:"Một người biết hút thuốc có hại cho sức khỏe (niềm tin) nhưng vẫn tiếp tục hút (hành vi) có thể giảm sự bất hòa bằng cách tự nhủ \"ông nội tôi hút thuốc cả đời mà vẫn sống đến 90 tuổi\" — thay đổi niềm tin để nó \"khớp\" với hành vi hiện tại, dễ hơn là từ bỏ thói quen."},
+
+{cat:"xahoi", vi:"Hiệu ứng hào quang", en:"Halo effect", short:"Xu hướng một ấn tượng tích cực (hoặc tiêu cực) ở một đặc điểm sẽ \"lan\" sang cách ta đánh giá các đặc điểm khác.",
+ detail:"Hiệu ứng này khiến chúng ta vô thức gán những phẩm chất tích cực (như thông minh, tốt bụng, đáng tin) cho những người có một đặc điểm nổi bật tích cực nào đó (thường là ngoại hình), dù không có bằng chứng liên quan trực tiếp.",
+ example:"Trong các nghiên cứu, giáo viên thường đánh giá bài luận của học sinh có ngoại hình ưa nhìn cao hơn so với bài luận giống hệt nhưng được gán cho học sinh kém ưa nhìn hơn — ấn tượng về ngoại hình \"lan\" sang đánh giá về năng lực học tập."},
+
+{cat:"xahoi", vi:"Định kiến trong nhóm", en:"In-group bias", short:"Xu hướng ưu ái và đánh giá tích cực hơn đối với những người thuộc nhóm của mình so với người ngoài nhóm.",
+ detail:"Chỉ cần được phân vào một nhóm — dù là ngẫu nhiên và không có ý nghĩa thực sự — con người đã có xu hướng thiên vị nhóm mình (in-group) và có thái độ tiêu cực hơn với nhóm khác (out-group). Đây là một trong những cơ chế tâm lý nền tảng cho phân biệt đối xử giữa các nhóm.",
+ example:"Người hâm mộ hai đội thể thao đối thủ thường đánh giá các quyết định gây tranh cãi của trọng tài theo hướng có lợi cho đội mình — dù xem cùng một tình huống, mỗi bên \"thấy\" một sự thật khác nhau dựa trên việc họ thuộc nhóm nào."},
+
+{cat:"xahoi", vi:"Sự lười biếng xã hội", en:"Social loafing", short:"Xu hướng mỗi cá nhân nỗ lực ít hơn khi làm việc trong nhóm so với khi làm việc một mình.",
+ detail:"Khi trách nhiệm được chia cho nhiều người và đóng góp cá nhân khó được nhận diện riêng, mỗi người có động lực giảm để \"dựa\" vào nỗ lực của người khác. Hiệu ứng này thường rõ hơn trong các nhóm lớn và khi nhiệm vụ không đòi hỏi sự tham gia cá nhân rõ ràng.",
+ example:"Trong một bài tập nhóm kéo dây thi đua, tổng lực kéo của một nhóm 8 người thường nhỏ hơn 8 lần lực kéo của một người kéo riêng lẻ — mỗi người có xu hướng \"bớt sức\" một chút khi biết nỗ lực của mình không thể tách riêng để đánh giá."},
+
+// ===== 7. CẢM XÚC & ĐỘNG LỰC =====
+{cat:"camxuc", vi:"Cảm xúc", en:"Emotion", short:"Trạng thái tâm lý phức tạp bao gồm phản ứng sinh lý, trải nghiệm chủ quan và biểu hiện hành vi.",
+ detail:"Các lý thuyết khác nhau tranh luận về thứ tự xảy ra: thuyết James-Lange cho rằng phản ứng cơ thể xảy ra trước và tạo ra cảm xúc (tim đập nhanh → ta nhận ra mình đang sợ); thuyết Cannon-Bard cho rằng phản ứng cơ thể và cảm xúc xảy ra đồng thời, độc lập với nhau.",
+ example:"Theo thuyết James-Lange, khi gặp một con rắn, bạn giật mình và tim đập nhanh trước, và chính việc nhận ra cơ thể mình phản ứng như vậy mới khiến bạn \"cảm thấy\" sợ hãi — không phải sợ trước rồi mới tim đập nhanh."},
+
+{cat:"camxuc", vi:"Động lực nội tại và ngoại tại", en:"Intrinsic vs extrinsic motivation", short:"Động lực xuất phát từ niềm vui/ý nghĩa bên trong hoạt động, so với động lực từ phần thưởng hoặc áp lực bên ngoài.",
+ detail:"Động lực nội tại (làm vì chính bản thân hoạt động đó thú vị hoặc có ý nghĩa) thường tạo ra sự bền vững và sáng tạo cao hơn động lực ngoại tại (làm vì tiền, điểm số, hoặc để tránh bị phạt). Một hiện tượng đáng chú ý là \"hiệu ứng làm xói mòn\" (overjustification effect) — thêm phần thưởng ngoại tại cho một hoạt động vốn đã thú vị có thể làm giảm động lực nội tại với hoạt động đó.",
+ example:"Một đứa trẻ thích vẽ tranh vì vui (động lực nội tại). Nếu bố mẹ bắt đầu trả tiền mỗi khi trẻ vẽ, sau một thời gian nếu ngừng trả tiền, trẻ có thể vẽ ít hơn cả lúc trước khi có tiền — niềm vui ban đầu đã bị \"thay thế\" bởi động lực tiền bạc."},
+
+{cat:"camxuc", vi:"Phản ứng \"chiến hay chạy\"", en:"Fight-or-flight response", short:"Phản ứng sinh lý tự động chuẩn bị cơ thể đối mặt hoặc trốn tránh một mối đe dọa.",
+ detail:"Khi gặp nguy hiểm (thật hoặc tưởng tượng), hệ thần kinh giao cảm kích hoạt một loạt thay đổi sinh lý: tim đập nhanh hơn, hơi thở gấp, đồng tử giãn, máu dồn về cơ bắp — tất cả nhằm chuẩn bị cho hành động khẩn cấp. Phản ứng này có lợi trong các tình huống nguy hiểm thực sự nhưng có thể trở thành vấn đề nếu bị kích hoạt thường xuyên bởi stress mãn tính không liên quan đến nguy hiểm thực thể.",
+ example:"Trước một bài thuyết trình quan trọng, dù không có nguy hiểm vật lý nào, nhiều người vẫn cảm thấy tim đập nhanh, lòng bàn tay đổ mồ hôi và bụng \"cồn cào\" — đó là phản ứng chiến-hay-chạy được kích hoạt bởi một mối đe dọa mang tính xã hội/tâm lý."},
+
+{cat:"camxuc", vi:"Trí tuệ cảm xúc", en:"Emotional intelligence", short:"Khả năng nhận biết, hiểu và quản lý cảm xúc của bản thân, cũng như nhận biết và ảnh hưởng đến cảm xúc của người khác.",
+ detail:"Trí tuệ cảm xúc thường được chia thành các thành phần: nhận biết cảm xúc bản thân, quản lý/điều chỉnh cảm xúc, động viên bản thân, đồng cảm (nhận biết cảm xúc người khác) và kỹ năng xã hội. Khác với IQ, trí tuệ cảm xúc có thể được rèn luyện và cải thiện qua thời gian.",
+ example:"Khi bị chỉ trích trong cuộc họp, một người có trí tuệ cảm xúc cao có thể nhận ra mình đang cảm thấy tức giận, tạm dừng một chút để không phản ứng bốc đồng, và phản hồi một cách bình tĩnh, mang tính xây dựng hơn."},
+
+{cat:"camxuc", vi:"Sự đồng cảm", en:"Empathy", short:"Khả năng hiểu và chia sẻ cảm xúc của người khác từ góc nhìn của họ.",
+ detail:"Đồng cảm thường được chia thành hai loại: đồng cảm nhận thức (cognitive empathy — hiểu người khác đang cảm thấy gì và vì sao) và đồng cảm cảm xúc (affective empathy — thực sự \"cảm\" được phần nào cảm xúc của người đó). Cả hai đều quan trọng cho các mối quan hệ và hành vi giúp đỡ, nhưng đồng cảm quá mức mà không có ranh giới cũng có thể dẫn đến kiệt sức cảm xúc.",
+ example:"Khi một người bạn kể về một mất mát lớn, đồng cảm nhận thức giúp bạn hiểu \"họ đang đau buồn vì lý do gì\", còn đồng cảm cảm xúc khiến bạn cũng cảm thấy nặng lòng, gần như \"lây\" nỗi buồn đó — cả hai cùng giúp bạn phản hồi một cách phù hợp và chân thành."},
+
+{cat:"camxuc", vi:"Hệ thống tưởng thưởng", en:"Reward system (dopamine)", short:"Mạng lưới các vùng não liên quan đến cảm giác thích thú, động lực và việc học từ những trải nghiệm tích cực.",
+ detail:"Dopamine — một chất dẫn truyền thần kinh quan trọng trong hệ thống này — không chỉ liên quan đến \"khoái cảm\" mà còn đóng vai trò quan trọng trong động lực và kỳ vọng: dopamine thường tăng mạnh khi dự đoán một phần thưởng, đôi khi còn nhiều hơn lúc thực sự nhận được phần thưởng đó.",
+ example:"Cảm giác hào hứng khi nghe điện thoại \"ting\" báo có thông báo mới — và sự thôi thúc muốn kiểm tra ngay — phần lớn liên quan đến sự gia tăng dopamine khi dự đoán một điều thú vị, chứ không hẳn vì nội dung thông báo đó thực sự quan trọng."},
+
+{cat:"camxuc", vi:"Lo âu", en:"Anxiety", short:"Trạng thái cảm xúc đặc trưng bởi cảm giác lo lắng, căng thẳng và lo sợ về những điều có thể xảy ra trong tương lai.",
+ detail:"Khác với sợ hãi (phản ứng với một mối đe dọa cụ thể, hiện tại), lo âu thường hướng về những mối đe dọa mơ hồ hoặc trong tương lai. Ở mức độ vừa phải, lo âu có thể giúp con người chuẩn bị và cẩn trọng hơn; nhưng khi quá mức hoặc kéo dài, nó có thể trở thành rối loạn và ảnh hưởng đến chất lượng sống.",
+ example:"Trước một kỳ thi quan trọng, một chút lo âu có thể giúp bạn ôn bài kỹ hơn (lo âu có ích). Nhưng nếu lo âu lớn đến mức khiến bạn mất ngủ nhiều ngày, không thể tập trung học, hoặc né tránh thi hoàn toàn, đó là lúc lo âu trở thành vấn đề cần được quan tâm."},
+
+{cat:"camxuc", vi:"Cơ chế ứng phó", en:"Coping mechanisms", short:"Các chiến lược (có ý thức hoặc không) mà con người dùng để quản lý stress và cảm xúc khó chịu.",
+ detail:"Ứng phó tập trung vào vấn đề (problem-focused) nhằm thay đổi hoặc loại bỏ nguồn gây stress; ứng phó tập trung vào cảm xúc (emotion-focused) nhằm điều chỉnh phản ứng cảm xúc với stress, đặc biệt hữu ích khi nguồn stress không thể thay đổi được. Cả hai có thể lành mạnh hoặc không lành mạnh tùy vào cách thực hiện.",
+ example:"Khi mất việc: tìm việc mới, cập nhật hồ sơ, học kỹ năng mới là ứng phó tập trung vào vấn đề; tâm sự với bạn bè để giải tỏa cảm xúc, hoặc tập thể dục để giảm stress là ứng phó tập trung vào cảm xúc — cả hai đều có thể hữu ích và bổ trợ cho nhau."},
+
+{cat:"camxuc", vi:"Trạng thái dòng chảy", en:"Flow", short:"Trạng thái tập trung sâu, hoàn toàn đắm chìm vào một hoạt động đến mức quên thời gian và bản thân.",
+ detail:"Csikszentmihalyi mô tả flow xảy ra khi độ khó của nhiệm vụ và kỹ năng của người thực hiện ở mức tương đương — không quá dễ (gây buồn chán) cũng không quá khó (gây lo lắng). Trong trạng thái flow, hoạt động trở nên tự thân là phần thưởng (intrinsically rewarding), và người thực hiện thường cảm thấy hạnh phúc và năng suất cao.",
+ example:"Một nghệ sĩ chơi nhạc trong một buổi tập kéo dài hai giờ nhưng cảm thấy như chỉ vừa mới bắt đầu — họ đã hoàn toàn \"chìm\" vào hoạt động, không còn nhận thức rõ về thời gian hoặc những lo lắng thường ngày, đó là trạng thái flow."},
+
+{cat:"camxuc", vi:"Sự hài lòng trì hoãn", en:"Delayed gratification", short:"Khả năng từ chối một phần thưởng nhỏ ngay lập tức để đạt được một phần thưởng lớn hơn trong tương lai.",
+ detail:"Khả năng này gắn liền với tự kiểm soát (self-control) và được xem là một yếu tố dự báo quan trọng cho nhiều kết quả tích cực trong cuộc sống như thành tích học tập, sức khỏe và mối quan hệ. Thí nghiệm \"kẹo marshmallow\" nổi tiếng của Walter Mischel đã nghiên cứu khả năng này ở trẻ em.",
+ example:"Trong thí nghiệm marshmallow, trẻ được cho lựa chọn: ăn ngay một viên kẹo, hoặc chờ 15 phút để được hai viên. Những trẻ có thể chờ — thường bằng cách tự đánh lạc hướng bản thân (không nhìn vào kẹo, hát, chơi đồ vật khác) — cho thấy khả năng trì hoãn sự hài lòng tốt hơn."},
+
+// ===== 8. LÂM SÀNG =====
+{cat:"lamsang", vi:"Trầm cảm", en:"Depression", short:"Rối loạn tâm trạng đặc trưng bởi cảm giác buồn bã kéo dài, mất hứng thú và giảm năng lượng.",
+ detail:"Trầm cảm không chỉ là \"buồn\" thông thường — nó kéo dài (thường ít nhất 2 tuần), ảnh hưởng đến nhiều mặt của cuộc sống (ngủ, ăn, tập trung, năng lượng) và thường đi kèm với những thay đổi trong cách suy nghĩ, như xu hướng nhìn mọi thứ theo hướng tiêu cực một cách hệ thống. Trầm cảm có nền tảng cả về sinh học (chất dẫn truyền thần kinh, di truyền) và tâm lý-xã hội.",
+ example:"Một người trước đây rất thích nấu ăn nhưng trong vài tuần liền không còn cảm thấy muốn vào bếp, kèm theo mất ngủ, ăn không ngon và khó tập trung vào công việc — đây là những dấu hiệu điển hình cần được quan tâm, không nên chỉ coi là \"lười\" hay \"tâm trạng không tốt\"."},
+
+{cat:"lamsang", vi:"Rối loạn lo âu", en:"Anxiety disorders", short:"Nhóm rối loạn trong đó lo âu trở nên quá mức, kéo dài và gây cản trở đáng kể đến cuộc sống hằng ngày.",
+ detail:"Bao gồm nhiều dạng như rối loạn lo âu lan tỏa (lo lắng liên tục về nhiều thứ), rối loạn hoảng sợ (các cơn hoảng loạn đột ngột và dữ dội), và các loại ám ảnh sợ (sợ hãi cực độ và phi lý với một đối tượng/tình huống cụ thể). Điểm chung là mức độ lo âu không tương xứng với mối đe dọa thực tế.",
+ example:"Một người mắc rối loạn lo âu lan tỏa có thể dành hàng giờ mỗi ngày lo lắng về những điều như \"liệu mình có khóa cửa chưa\", \"liệu sức khỏe gia đình có ổn không\", \"liệu công việc có ổn không\" — dù không có dấu hiệu cụ thể nào cho thấy có vấn đề thực sự, và sự lo lắng này ảnh hưởng đến khả năng tập trung vào cuộc sống hiện tại."},
+
+{cat:"lamsang", vi:"Rối loạn stress sau sang chấn", en:"PTSD", short:"Rối loạn phát triển sau khi trải qua hoặc chứng kiến một sự kiện gây sang chấn nghiêm trọng.",
+ detail:"Các triệu chứng đặc trưng bao gồm: hồi tưởng/ác mộng tái diễn về sự kiện (re-experiencing), né tránh những thứ liên quan đến sự kiện, thay đổi tiêu cực trong suy nghĩ/cảm xúc, và tình trạng cảnh giác quá mức (hyperarousal). PTSD có thể xảy ra với bất kỳ ai trải qua sang chấn nghiêm trọng, không chỉ riêng quân nhân.",
+ example:"Một người từng trải qua một vụ tai nạn xe nghiêm trọng có thể giật mình dữ dội với tiếng động lớn bất ngờ, tránh đi qua khu vực xảy ra tai nạn, và thường xuyên gặp lại hình ảnh vụ việc trong những giấc mơ — nhiều năm sau khi sự kiện đã qua."},
+
+{cat:"lamsang", vi:"Liệu pháp nhận thức hành vi", en:"Cognitive Behavioral Therapy (CBT)", short:"Phương pháp trị liệu giúp nhận diện và thay đổi các mẫu suy nghĩ và hành vi không lành mạnh.",
+ detail:"CBT dựa trên ý tưởng rằng suy nghĩ, cảm xúc và hành vi liên hệ chặt chẽ với nhau — thay đổi một mẫu suy nghĩ méo mó (cognitive distortion) có thể giúp cải thiện cảm xúc và hành vi. CBT thường có cấu trúc, hướng tới mục tiêu cụ thể và thường bao gồm cả \"bài tập về nhà\" để thực hành kỹ năng giữa các buổi trị liệu.",
+ example:"Một người có suy nghĩ \"nếu tôi mắc một lỗi nhỏ trong báo cáo, sếp sẽ nghĩ tôi vô dụng và sa thải tôi\" (một dạng \"thảm họa hóa\" — catastrophizing) có thể được hướng dẫn trong CBT để nhận diện suy nghĩ này, kiểm tra bằng chứng thực tế, và thay thế bằng một suy nghĩ cân bằng hơn như \"một lỗi nhỏ là điều bình thường và có thể sửa được\"."},
+
+{cat:"lamsang", vi:"Rối loạn ám ảnh cưỡng chế", en:"OCD", short:"Rối loạn đặc trưng bởi những suy nghĩ ám ảnh lặp đi lặp lại (obsessions) và hành vi cưỡng chế (compulsions) để giảm lo âu do những suy nghĩ đó gây ra.",
+ detail:"Ám ảnh là những suy nghĩ, hình ảnh hoặc xung động không mong muốn, gây lo âu và lặp đi lặp lại. Cưỡng chế là những hành vi (hoặc nghi thức tinh thần) được thực hiện để giảm lo âu do ám ảnh gây ra — nhưng sự giảm nhẹ này thường chỉ tạm thời, khiến vòng lặp tiếp tục.",
+ example:"Một người có ám ảnh về việc \"tay mình bị bẩn vi khuẩn\" (obsession) có thể rửa tay rất nhiều lần mỗi ngày, đến mức da tay bị tổn thương, theo một quy trình cố định (compulsion) — việc rửa tay tạm thời làm giảm lo âu, nhưng ám ảnh sẽ quay lại không lâu sau đó, khiến vòng lặp tiếp diễn."},
+
+{cat:"lamsang", vi:"Tâm thần phân liệt", en:"Schizophrenia", short:"Rối loạn tâm thần nghiêm trọng ảnh hưởng đến cách một người suy nghĩ, cảm nhận và hành xử, có thể bao gồm hoang tưởng và ảo giác.",
+ detail:"Các triệu chứng được chia thành \"dương tính\" (những trải nghiệm thêm vào so với bình thường, như ảo giác, hoang tưởng, suy nghĩ rối loạn) và \"âm tính\" (sự thiếu hụt so với bình thường, như giảm biểu cảm cảm xúc, thu mình xã hội). Tâm thần phân liệt có nền tảng sinh học mạnh, liên quan đến cả gen và các yếu tố môi trường.",
+ example:"Một người có thể nghe thấy những giọng nói mà không ai khác nghe thấy (ảo giác thính giác) và tin rằng những giọng nói đó là thật — đây là một ví dụ về triệu chứng dương tính, một trong những đặc trưng dễ nhận biết nhất của tâm thần phân liệt."},
+
+{cat:"lamsang", vi:"Hệ thống chẩn đoán (DSM)", en:"Diagnostic classification (DSM)", short:"Hệ thống phân loại được dùng để chẩn đoán các rối loạn tâm thần dựa trên tập hợp các tiêu chí triệu chứng.",
+ detail:"Cẩm nang Thống kê và Chẩn đoán các Rối loạn Tâm thần (DSM, do Hiệp hội Tâm thần học Hoa Kỳ xuất bản) cung cấp các tiêu chí cụ thể để chẩn đoán — ví dụ, cần có bao nhiêu triệu chứng, kéo dài bao lâu — nhằm giúp các chuyên gia chẩn đoán nhất quán hơn. Hệ thống này được cập nhật theo thời gian khi hiểu biết khoa học thay đổi.",
+ example:"Để được chẩn đoán mắc một giai đoạn trầm cảm chủ yếu theo DSM, một người cần có ít nhất 5 trong số 9 triệu chứng cụ thể (như tâm trạng buồn, mất hứng thú, thay đổi giấc ngủ...) kéo dài liên tục trong ít nhất 2 tuần — tiêu chí cụ thể giúp phân biệt giữa \"có một ngày buồn\" và \"một rối loạn cần can thiệp\"."},
+
+{cat:"lamsang", vi:"Khả năng phục hồi tâm lý", en:"Resilience", short:"Khả năng thích nghi tốt và \"bật lại\" sau khi trải qua khó khăn, mất mát hoặc sang chấn.",
+ detail:"Resilience không có nghĩa là không cảm thấy đau khổ — người có khả năng phục hồi cao vẫn trải qua những cảm xúc khó khăn, nhưng có khả năng tìm lại được sự ổn định và tiếp tục chức năng sống tương đối tốt sau đó. Resilience không phải là một đặc điểm cố định mà có thể được xây dựng thông qua các mối quan hệ hỗ trợ, kỹ năng ứng phó và cách suy nghĩ về khó khăn.",
+ example:"Hai người cùng trải qua một cuộc chia tay đau khổ: một người dần tìm lại cân bằng, duy trì công việc và các mối quan hệ khác sau vài tuần; người khác có thể mất khả năng hoạt động trong nhiều tháng — sự khác biệt này phần lớn liên quan đến khả năng phục hồi tâm lý của mỗi người."},
+
+{cat:"lamsang", vi:"Hội chứng cháy sạch", en:"Burnout", short:"Trạng thái kiệt sức về cảm xúc, thể chất và tinh thần do stress kéo dài, thường liên quan đến công việc.",
+ detail:"Burnout thường được mô tả qua ba khía cạnh: kiệt sức về cảm xúc (cảm thấy cạn kiệt năng lượng), hoài nghi/xa cách (mất kết nối với công việc, đồng nghiệp), và giảm cảm giác hiệu quả cá nhân (cảm thấy mình không còn làm tốt như trước). Burnout khác với mệt mỏi thông thường vì nó kéo dài và không hồi phục chỉ bằng việc nghỉ ngơi ngắn.",
+ example:"Một người từng rất nhiệt huyết với công việc dần trở nên thờ ơ, hay cáu gắt với đồng nghiệp, và cảm thấy mọi nỗ lực của mình \"chẳng đi đến đâu\" — dù đã nghỉ một kỳ nghỉ ngắn nhưng cảm giác kiệt sức vẫn quay lại ngay khi đi làm trở lại, đó là dấu hiệu của burnout, không chỉ là mệt thông thường."},
+
+{cat:"lamsang", vi:"Liệu pháp tiếp xúc", en:"Exposure therapy", short:"Phương pháp trị liệu giúp giảm lo âu/sợ hãi bằng cách cho người bệnh tiếp xúc dần với đối tượng/tình huống gây sợ trong môi trường an toàn.",
+ detail:"Liệu pháp dựa trên nguyên lý của điều kiện hóa: khi tiếp xúc với kích thích gây sợ nhiều lần mà không có kết quả tiêu cực thực sự xảy ra, phản ứng sợ hãi sẽ dần \"dập tắt\". Tiếp xúc có thể được thực hiện dần dần theo từng bước (graded exposure) hoặc tiếp xúc đầy đủ ngay từ đầu (flooding), tùy theo từng trường hợp.",
+ example:"Một người sợ chó nghiêm trọng có thể bắt đầu liệu pháp bằng cách nhìn ảnh chó, sau đó xem video, rồi đứng cách một con chó hiền vài mét, và cuối cùng có thể chạm vào nó — mỗi bước chỉ tiến lên khi mức lo âu ở bước hiện tại đã giảm đáng kể."},
+
+// ===== 9. SINH LÝ & THẦN KINH =====
+{cat:"sinhly", vi:"Neuron và synapse", en:"Neuron & synapse", short:"Neuron là tế bào thần kinh cơ bản; synapse là khoảng kết nối nơi neuron \"giao tiếp\" với nhau.",
+ detail:"Mỗi neuron nhận tín hiệu qua các nhánh (dendrite), xử lý và truyền tín hiệu điện qua sợi trục (axon), rồi giải phóng chất dẫn truyền thần kinh tại synapse để truyền tín hiệu sang neuron tiếp theo. Toàn bộ hoạt động tinh thần — suy nghĩ, cảm xúc, ký ức — về bản chất là các mẫu hoạt động điện-hóa học của hàng tỷ neuron kết nối với nhau.",
+ example:"Khi bạn chạm vào một vật nóng, tín hiệu từ ngón tay truyền qua một chuỗi neuron đến não với tốc độ rất nhanh — tại mỗi điểm nối (synapse), tín hiệu điện được chuyển thành tín hiệu hóa học rồi lại thành tín hiệu điện, cho đến khi não \"nhận ra\" cảm giác nóng và bạn rút tay lại."},
+
+{cat:"sinhly", vi:"Chất dẫn truyền thần kinh", en:"Neurotransmitters", short:"Các phân tử hóa học mang tín hiệu giữa các neuron qua synapse, ảnh hưởng đến tâm trạng, suy nghĩ và hành vi.",
+ detail:"Mỗi chất dẫn truyền thần kinh có vai trò tương đối đặc trưng: dopamine liên quan đến động lực và khoái cảm, serotonin liên quan đến tâm trạng và giấc ngủ, norepinephrine liên quan đến tỉnh táo và phản ứng stress, GABA có tác dụng làm dịu hệ thần kinh. Sự mất cân bằng của các chất này có liên quan đến nhiều rối loạn tâm lý.",
+ example:"Nhiều loại thuốc chống trầm cảm phổ biến (như SSRI) hoạt động bằng cách làm tăng lượng serotonin có sẵn ở các synapse trong não, dựa trên giả thuyết rằng sự thiếu hụt serotonin liên quan đến một số dạng trầm cảm."},
+
+{cat:"sinhly", vi:"Hệ viền", en:"Limbic system", short:"Nhóm các cấu trúc não liên quan đến cảm xúc, trí nhớ và động lực, nằm sâu bên trong não.",
+ detail:"Các thành phần chính bao gồm amygdala (xử lý cảm xúc, đặc biệt là sợ hãi), hippocampus (hình thành trí nhớ dài hạn) và hypothalamus (điều hòa các nhu cầu sinh học cơ bản như đói, khát). Hệ viền thường được gọi là \"não cảm xúc\", hoạt động phối hợp chặt chẽ với vỏ não trước trán.",
+ example:"Khi bạn nghe một tiếng động lớn bất ngờ trong đêm, amygdala kích hoạt phản ứng sợ hãi gần như ngay lập tức — trước khi vỏ não (phần \"suy nghĩ logic\") có đủ thời gian để xác định liệu tiếng động đó có thực sự nguy hiểm hay không."},
+
+{cat:"sinhly", vi:"Vỏ não trước trán", en:"Prefrontal cortex", short:"Vùng não nằm ở phía trước, liên quan đến lập kế hoạch, ra quyết định, kiểm soát xung động và điều chỉnh cảm xúc.",
+ detail:"Vỏ não trước trán thường được coi là vùng \"chức năng hành pháp\" (executive function) của não — nơi diễn ra các quá trình tư duy bậc cao như lập kế hoạch dài hạn, kiểm soát xung động và cân nhắc hệ quả. Vùng này phát triển và trưởng thành muộn hơn so với các vùng não khác, thường chưa hoàn thiện đầy đủ cho đến khoảng giữa độ tuổi 20.",
+ example:"Việc vỏ não trước trán ở thanh thiếu niên chưa phát triển hoàn thiện một phần giải thích vì sao nhóm tuổi này có xu hướng dễ hành động bốc đồng hoặc đánh giá rủi ro kém chính xác hơn so với người trưởng thành, dù khả năng tư duy logic của họ đã khá phát triển."},
+
+{cat:"sinhly", vi:"Tính dẻo của não", en:"Neuroplasticity", short:"Khả năng não thay đổi cấu trúc và chức năng của mình dựa trên kinh nghiệm và học tập.",
+ detail:"Não không \"cố định\" sau một độ tuổi nhất định — các kết nối synapse có thể được củng cố, suy yếu, hoặc thậm chí hình thành mới, dựa trên những gì chúng ta lặp đi lặp lại. Nguyên lý \"các neuron cùng hoạt động sẽ kết nối với nhau\" (cells that fire together, wire together) giải thích vì sao luyện tập lặp lại có thể thay đổi cấu trúc não vật lý.",
+ example:"Các nghiên cứu cho thấy não của những người lái taxi lâu năm ở các thành phố lớn có vùng hippocampus (liên quan đến trí nhớ không gian) lớn hơn so với người bình thường — việc liên tục ghi nhớ và điều hướng bản đồ phức tạp trong nhiều năm đã \"định hình lại\" cấu trúc não của họ."},
+
+{cat:"sinhly", vi:"Hormone stress (Cortisol)", en:"Cortisol", short:"Hormone chính được giải phóng khi cơ thể trải qua stress, ảnh hưởng đến năng lượng, miễn dịch và nhiều hệ thống khác.",
+ detail:"Cortisol được điều khiển bởi trục HPA (vùng dưới đồi - tuyến yên - tuyến thượng thận) và giúp cơ thể huy động năng lượng để đối phó với stress trong ngắn hạn. Tuy nhiên, mức cortisol cao kéo dài (stress mãn tính) có liên quan đến nhiều vấn đề sức khỏe như suy giảm trí nhớ, rối loạn giấc ngủ và suy yếu hệ miễn dịch.",
+ example:"Một người làm việc trong môi trường áp lực cao kéo dài nhiều tháng có thể nhận thấy mình dễ bị ốm hơn bình thường, ngủ không sâu và khó tập trung — đây có thể là những ảnh hưởng của mức cortisol cao kéo dài lên cơ thể và não bộ."},
+
+{cat:"sinhly", vi:"Đồng hồ sinh học", en:"Circadian rhythm", short:"Chu kỳ sinh học khoảng 24 giờ điều khiển các quá trình như giấc ngủ, hormone và nhiệt độ cơ thể.",
+ detail:"Đồng hồ sinh học được điều chỉnh chủ yếu bởi ánh sáng — đặc biệt là ánh sáng mặt trời vào buổi sáng, giúp \"đặt lại\" đồng hồ mỗi ngày. Sự lệch pha giữa đồng hồ sinh học bên trong và lịch trình sinh hoạt thực tế (như khi đi máy bay qua nhiều múi giờ, hoặc làm việc theo ca đêm) có thể gây ra mệt mỏi, giảm tập trung và ảnh hưởng tâm trạng.",
+ example:"Hiện tượng \"jet lag\" khi bay qua nhiều múi giờ — cảm thấy buồn ngủ vào ban ngày và tỉnh táo vào ban đêm tại địa điểm mới — là kết quả của việc đồng hồ sinh học bên trong cơ thể chưa kịp \"đồng bộ\" với giờ địa phương mới."},
+
+{cat:"sinhly", vi:"Sự chuyên hóa bán cầu não", en:"Hemispheric specialization", short:"Hai bán cầu não có xu hướng đảm nhiệm một số chức năng khác nhau, dù phần lớn hoạt động cần sự phối hợp của cả hai.",
+ detail:"Quan niệm phổ biến \"não trái logic, não phải sáng tạo\" là một sự đơn giản hóa quá mức — thực tế hầu hết các nhiệm vụ phức tạp đều cần cả hai bán cầu phối hợp qua thể chai (corpus callosum). Tuy vậy, một số chức năng có xu hướng \"trội\" hơn ở một bên, ví dụ ngôn ngữ thường (nhưng không luôn) trội hơn ở bán cầu trái.",
+ example:"Ở hầu hết người thuận tay phải, các vùng não chịu trách nhiệm chính về xử lý ngôn ngữ (như vùng Broca và Wernicke) thường nằm ở bán cầu trái — tổn thương ở các vùng này thường gây ra các rối loạn ngôn ngữ rõ rệt hơn so với tổn thương tương ứng ở bán cầu phải."},
+
+{cat:"sinhly", vi:"Hệ thần kinh tự chủ", en:"Autonomic nervous system", short:"Phần hệ thần kinh điều khiển các chức năng cơ thể tự động, không cần ý thức kiểm soát.",
+ detail:"Gồm hai nhánh đối lập: hệ giao cảm (sympathetic) kích hoạt phản ứng \"chiến hay chạy\" (tăng nhịp tim, năng lượng), và hệ đối giao cảm (parasympathetic) thúc đẩy trạng thái \"nghỉ ngơi và tiêu hóa\" (giảm nhịp tim, thư giãn). Hai hệ này hoạt động như một cặp \"phanh-ga\" để duy trì sự cân bằng của cơ thể.",
+ example:"Các kỹ thuật thở sâu, chậm thường được dùng để giảm lo âu vì chúng có thể kích hoạt hệ đối giao cảm — \"phanh\" lại phản ứng căng thẳng của hệ giao cảm, giúp nhịp tim chậm lại và cơ thể thư giãn hơn."},
+
+{cat:"sinhly", vi:"Di truyền hành vi", en:"Behavioral genetics", short:"Lĩnh vực nghiên cứu mức độ ảnh hưởng của gen đến các đặc điểm tâm lý và hành vi.",
+ detail:"Các nghiên cứu trên cặp song sinh (đặc biệt là song sinh cùng trứng được nuôi tách biệt) giúp ước tính \"hệ số di truyền\" (heritability) — tỷ lệ phần trăm sự khác biệt giữa các cá nhân trong một quần thể có thể được giải thích bởi gen. Quan trọng là: hệ số di truyền là một con số mang tính thống kê cho cả quần thể, không có nghĩa là một đặc điểm cụ thể của một cá nhân \"có X% là do gen\".",
+ example:"Nếu các nghiên cứu cho thấy trí thông minh có hệ số di truyền khoảng 50% trong một quần thể, điều đó không nghĩa là \"50% chỉ số IQ của một người do gen quyết định\" — mà có nghĩa là khoảng 50% sự khác biệt về IQ giữa các cá nhân trong quần thể đó có liên quan đến sự khác biệt về gen."},
+
+// ===== 10. THIÊN KIẾN NHẬN THỨC =====
+{cat:"thienkien", vi:"Thiên kiến xác nhận", en:"Confirmation bias", short:"Xu hướng tìm kiếm, ghi nhớ và ưu tiên thông tin xác nhận những gì mình đã tin, đồng thời bỏ qua thông tin trái ngược.",
+ detail:"Thiên kiến này khiến niềm tin ban đầu của một người trở nên ngày càng \"vững chắc\" theo thời gian, không phải vì có thêm bằng chứng khách quan, mà vì cách thông tin được tìm kiếm và xử lý đã bị \"thiên lệch\" từ đầu. Đây là một trong những thiên kiến phổ biến và khó nhận ra nhất, vì nó hoạt động ở mức độ rất tự động.",
+ example:"Một người tin rằng \"người sinh vào một cung hoàng đạo cụ thể thường có tính cách X\" sẽ dễ nhớ những lần điều đó đúng (\"thấy chưa, đúng thật\") và quên hoặc bỏ qua những lần nó sai — khiến niềm tin ban đầu ngày càng được \"xác nhận\" trong tâm trí họ, dù bằng chứng tổng thể không hỗ trợ điều đó."},
+
+{cat:"thienkien", vi:"Heuristic tính khả dụng", en:"Availability heuristic", short:"Xu hướng đánh giá khả năng xảy ra của một điều dựa trên việc nó dễ \"nhớ ra\" như thế nào, hơn là dựa trên xác suất thực tế.",
+ detail:"Những sự kiện gây ấn tượng mạnh, được nhắc nhiều trên truyền thông, hoặc gần đây xảy ra với bản thân sẽ \"dễ nhớ ra\" hơn — khiến chúng ta đánh giá quá cao xác suất xảy ra của chúng so với những sự kiện ít gây chú ý nhưng thực tế phổ biến hơn.",
+ example:"Nhiều người sợ đi máy bay hơn đi xe ô tô, dù về thống kê, tai nạn xe ô tô gây tử vong nhiều hơn rất nhiều — nhưng tai nạn máy bay thường được đưa tin rộng rãi và gây ấn tượng mạnh, khiến chúng \"dễ nhớ ra\" hơn và bị đánh giá là phổ biến hơn thực tế."},
+
+{cat:"thienkien", vi:"Hiệu ứng mỏ neo", en:"Anchoring effect", short:"Xu hướng dựa quá nhiều vào một thông tin đầu tiên (\"mỏ neo\") khi đưa ra ước tính hoặc quyết định sau đó.",
+ detail:"Mỏ neo có thể hoàn toàn không liên quan đến quyết định, nhưng vẫn ảnh hưởng đến kết quả cuối cùng — vì các ước tính sau đó thường được điều chỉnh \"từ\" mỏ neo ban đầu, dù sự điều chỉnh đó thường không đủ lớn để loại bỏ hoàn toàn ảnh hưởng.",
+ example:"Khi mua sắm, nếu một sản phẩm được dán giá gốc \"2.000.000đ\" và giá khuyến mãi \"1.200.000đ\", nhiều người cảm thấy giá 1.200.000đ là \"hời\" — dù không biết liệu 2.000.000đ có phải là mức giá hợp lý ban đầu hay không; con số đầu tiên đã trở thành \"mỏ neo\" cho cảm nhận về giá trị."},
+
+{cat:"thienkien", vi:"Ngụy biện chi phí đã bỏ ra", en:"Sunk cost fallacy", short:"Xu hướng tiếp tục đầu tư vào một việc vì đã \"bỏ ra\" nhiều, dù việc tiếp tục không còn hợp lý.",
+ detail:"Về lý thuyết, các quyết định nên dựa trên chi phí và lợi ích trong tương lai, không phải những gì đã \"mất\" trong quá khứ (vì những chi phí đó không thể lấy lại được dù có quyết định thế nào). Nhưng con người thường cảm thấy \"bỏ cuộc\" đồng nghĩa với việc thừa nhận những nỗ lực trước đó là \"lãng phí\", nên có xu hướng tiếp tục dù không còn ý nghĩa.",
+ example:"Một người đã xem một bộ phim chán trong 1 giờ nhưng vẫn tiếp tục xem hết 2 giờ còn lại vì \"đã xem một nửa rồi, bỏ thì tiếc\" — dù 1 giờ đã xem không thể lấy lại được dù họ có xem tiếp hay không, và 2 giờ tiếp theo cũng sẽ chán như đã trải nghiệm."},
+
+{cat:"thienkien", vi:"Hiệu ứng Dunning-Kruger", en:"Dunning-Kruger effect", short:"Xu hướng những người có ít năng lực trong một lĩnh vực lại đánh giá quá cao năng lực của mình.",
+ detail:"Hiệu ứng này xảy ra một phần vì để nhận ra mình kém ở một việc gì, người ta cần có đủ kiến thức/kỹ năng để nhận ra sự thiếu hụt đó — người mới bắt đầu thường chưa có \"thước đo\" để biết mình đang ở đâu. Ngược lại, những người có năng lực thực sự cao đôi khi lại đánh giá thấp bản thân vì họ thấy rõ những điều mình còn chưa biết.",
+ example:"Một người mới học chơi guitar được vài tuần có thể tự tin rằng mình \"chơi khá tốt rồi\", trong khi một nghệ sĩ guitar chuyên nghiệp với 20 năm kinh nghiệm lại thường tự nhận xét khắt khe về bản thân, vì họ nhận ra rõ khoảng cách giữa kỹ năng hiện tại và mức độ thành thạo lý tưởng."},
+
+{cat:"thienkien", vi:"Lỗi quy kết cơ bản", en:"Fundamental attribution error", short:"Xu hướng giải thích hành vi của người khác bằng tính cách của họ, nhưng giải thích hành vi của chính mình bằng tình huống.",
+ detail:"Khi quan sát người khác, chúng ta thường thiếu thông tin về hoàn cảnh của họ, nên dễ quy hành vi về \"bản chất con người\" họ. Nhưng khi nhìn lại hành vi của chính mình, chúng ta có đầy đủ thông tin về hoàn cảnh, nên dễ giải thích bằng các yếu tố bên ngoài — tạo ra một sự thiên lệch hệ thống trong cách nhìn nhận về người khác so với bản thân.",
+ example:"Nếu một người khác lái xe ẩu, ta dễ nghĩ \"anh ta là người ích kỷ, bất cẩn\" (quy kết tính cách); nhưng nếu chính ta lái xe ẩu trong một tình huống tương tự, ta có xu hướng nghĩ \"tại vì mình đang vội đi cấp cứu\" hoặc \"đường hôm nay đông quá\" (quy kết tình huống)."},
+
+{cat:"thienkien", vi:"Thiên kiến hồi tưởng", en:"Hindsight bias", short:"Xu hướng, sau khi biết kết quả, cảm thấy kết quả đó \"đáng lẽ phải biết trước\" — dù trước đó không thể đoán được.",
+ detail:"Còn được gọi là hiệu ứng \"tôi đã biết ngay từ đầu\" (I-knew-it-all-along effect). Thiên kiến này khiến chúng ta đánh giá quá cao khả năng dự đoán của mình trong quá khứ, và có thể dẫn đến việc đánh giá quá khắc nghiệt những quyết định trước đó của người khác (hoặc của chính mình) dựa trên thông tin mà lúc đó chưa ai có.",
+ example:"Sau khi một đội thể thao thua một trận đấu quan trọng, nhiều người hâm mộ nói \"tôi đã biết là họ sẽ thua mà\" — dù trước trận đấu, phần lớn trong số đó (kể cả các chuyên gia) đã dự đoán đội này sẽ thắng."},
+
+{cat:"thienkien", vi:"Ác cảm mất mát", en:"Loss aversion", short:"Xu hướng cảm thấy đau khổ khi mất một thứ gì đó mạnh hơn nhiều so với niềm vui khi nhận được một thứ có giá trị tương đương.",
+ detail:"Theo lý thuyết viễn cảnh (prospect theory) của Kahneman và Tversky, về mặt tâm lý, \"mất 100.000đ\" cảm thấy tồi tệ hơn nhiều so với việc \"được 100.000đ\" cảm thấy vui — dù giá trị tuyệt đối bằng nhau. Điều này khiến con người có xu hướng tránh rủi ro mất mát hơn là tìm kiếm cơ hội có lợi tương đương.",
+ example:"Nhiều người giữ một cổ phiếu đang giảm giá rất lâu, chờ \"hòa vốn\" rồi mới bán, dù có những lựa chọn đầu tư khác tốt hơn — vì việc \"chốt lỗ\" (xác nhận mất mát) cảm thấy đau đớn hơn việc tiếp tục giữ và hy vọng, dù về lý thuyết tài chính, quyết định giữ hay bán nên dựa trên triển vọng tương lai, không phải giá đã mua."},
+
+{cat:"thienkien", vi:"Hiệu ứng đóng khung", en:"Framing effect", short:"Xu hướng đưa ra quyết định khác nhau tùy vào cách thông tin được trình bày (\"đóng khung\"), dù nội dung thực chất giống nhau.",
+ detail:"Cùng một thông tin nhưng được diễn đạt theo hướng \"tích cực\" (ví dụ: \"tỷ lệ sống là 90%\") hay \"tiêu cực\" (\"tỷ lệ tử vong là 10%\") có thể dẫn đến những phản ứng và quyết định rất khác nhau, dù về mặt logic, hai cách diễn đạt này hoàn toàn tương đương.",
+ example:"Một loại thuốc được mô tả là \"có hiệu quả với 90% bệnh nhân\" thường được đánh giá tích cực hơn so với khi mô tả \"không hiệu quả với 10% bệnh nhân\" — dù hai con số này diễn tả chính xác cùng một thực tế."},
+
+{cat:"thienkien", vi:"Lời tiên đoán tự ứng nghiệm", en:"Self-fulfilling prophecy", short:"Một niềm tin (dù ban đầu không đúng) có thể khiến hành vi của một người thay đổi theo cách làm cho niềm tin đó trở thành sự thật.",
+ detail:"Niềm tin ảnh hưởng đến hành vi, hành vi ảnh hưởng đến phản ứng của người khác hoặc kết quả thực tế, và kết quả đó cuối cùng \"xác nhận\" lại niềm tin ban đầu — tạo thành một vòng lặp. Hiệu ứng này nổi tiếng qua nghiên cứu \"Pygmalion\" trong giáo dục, nơi kỳ vọng của giáo viên về học sinh ảnh hưởng đến kết quả học tập thực tế của học sinh đó.",
+ example:"Trong một nghiên cứu, giáo viên được (sai) thông báo rằng một số học sinh được chọn ngẫu nhiên \"có tiềm năng đặc biệt\". Sau một thời gian, những học sinh này thực sự đạt kết quả tốt hơn — có thể vì giáo viên (vô thức) đối xử với họ khác đi (kỳ vọng cao hơn, chú ý nhiều hơn), khiến niềm tin ban đầu (dù sai) trở thành sự thật."},
+];
+
+// Build category lookup for color
+const CAT_MAP = {};
+CATS.forEach(c => CAT_MAP[c.key] = c);
+
+// Render chips
+const chipsEl = document.getElementById('chips');
+let activeCat = 'all';
+
+function renderChips(){
+  chipsEl.innerHTML = '';
+  const allChip = document.createElement('div');
+  allChip.className = 'chip' + (activeCat==='all' ? ' active':'');
+  allChip.innerHTML = `<span class="dot" style="--dotcolor:#999"></span> Tất cả`;
+  allChip.onclick = () => { activeCat='all'; renderChips(); renderGrid(); };
+  chipsEl.appendChild(allChip);
+
+  CATS.forEach(c => {
+    const chip = document.createElement('div');
+    chip.className = 'chip' + (activeCat===c.key ? ' active':'');
+    chip.style.setProperty('--dotcolor', c.color);
+    chip.innerHTML = `<span class="dot"></span> ${c.label}`;
+    chip.onclick = () => { activeCat=c.key; renderChips(); renderGrid(); };
+    chipsEl.appendChild(chip);
+  });
+}
+
+// Render grid
+const gridEl = document.getElementById('grid');
+const noResultsEl = document.getElementById('noResults');
+const countRowEl = document.getElementById('countRow');
+let filtered = [];
+
+function renderGrid(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  filtered = DATA.map((d,i)=>({...d, idx:i})).filter(d => {
+    const matchCat = activeCat==='all' || d.cat===activeCat;
+    const text = (d.vi + ' ' + d.en + ' ' + d.short + ' ' + d.detail).toLowerCase();
+    const matchQ = q==='' || text.includes(q);
+    return matchCat && matchQ;
+  });
+
+  gridEl.innerHTML = '';
+  if(filtered.length===0){
+    noResultsEl.style.display='block';
+  } else {
+    noResultsEl.style.display='none';
+  }
+
+  filtered.forEach((d, displayIdx) => {
+    const cat = CAT_MAP[d.cat];
+    const card = document.createElement('button');
+    card.className = 'card';
+    card.style.setProperty('--cardcolor', cat.color);
+    card.innerHTML = `
+      <div class="card-top">
+        <span class="num">#${String(d.idx+1).padStart(2,'0')}</span>
+        <span class="cat-tag">${cat.label}</span>
+      </div>
+      <h3>${d.vi}<span class="en">${d.en}</span></h3>
+      <p>${d.short}</p>
+      <div class="read">Xem chi tiết
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>`;
+    card.onclick = () => openModal(displayIdx);
+    gridEl.appendChild(card);
+  });
+
+  countRowEl.textContent = `Hiển thị ${filtered.length} / ${DATA.length} khái niệm`;
+}
+
+// Modal
+const overlay = document.getElementById('overlay');
+const modal = overlay.querySelector('.modal');
+let currentIdx = 0;
+
+function openModal(displayIdx){
+  currentIdx = displayIdx;
+  showCurrent();
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function showCurrent(){
+  const d = filtered[currentIdx];
+  const cat = CAT_MAP[d.cat];
+  modal.style.setProperty('--modalcolor', cat.color);
+  document.getElementById('mCat').textContent = `${cat.label} · #${String(d.idx+1).padStart(2,'0')}`;
+  document.getElementById('mName').textContent = d.vi;
+  document.getElementById('mEn').textContent = d.en;
+  document.getElementById('mDetail').textContent = d.detail;
+  document.getElementById('mExample').textContent = d.example;
+  modal.scrollTop = 0;
+  document.getElementById('mPrev').style.visibility = currentIdx>0 ? 'visible':'hidden';
+  document.getElementById('mNext').style.visibility = currentIdx<filtered.length-1 ? 'visible':'hidden';
+}
+
+function closeModal(){
+  overlay.classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.getElementById('mClose').onclick = closeModal;
+overlay.onclick = (e) => { if(e.target===overlay) closeModal(); };
+document.getElementById('mPrev').onclick = () => { if(currentIdx>0){ currentIdx--; showCurrent(); } };
+document.getElementById('mNext').onclick = () => { if(currentIdx<filtered.length-1){ currentIdx++; showCurrent(); } };
+
+document.addEventListener('keydown', (e) => {
+  if(!overlay.classList.contains('open')) return;
+  if(e.key==='Escape') closeModal();
+  if(e.key==='ArrowLeft' && currentIdx>0){ currentIdx--; showCurrent(); }
+  if(e.key==='ArrowRight' && currentIdx<filtered.length-1){ currentIdx++; showCurrent(); }
+});
+
+document.getElementById('search').addEventListener('input', renderGrid);
+
+renderChips();
+renderGrid();
+</script>
+</body>
+</html>
